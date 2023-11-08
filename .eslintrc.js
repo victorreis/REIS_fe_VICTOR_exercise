@@ -204,6 +204,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/jsx-no-useless-fragment': [2, { allowExpressions: true }],
     'react/prop-types': 0,
+    'react/require-default-props': 0,
     'react/self-closing-comp': [
       2,
       {
