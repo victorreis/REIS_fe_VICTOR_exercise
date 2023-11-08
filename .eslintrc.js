@@ -1,3 +1,40 @@
+const defaultExtends = [
+  'eslint:recommended',
+  'airbnb',
+  'airbnb-typescript',
+  'plugin:@typescript-eslint/eslint-recommended',
+  'plugin:@typescript-eslint/recommended',
+  'plugin:@typescript-eslint/recommended-requiring-type-checking',
+  'plugin:react/all',
+  'plugin:react/jsx-runtime',
+  'plugin:react-hooks/recommended',
+  'airbnb/hooks',
+  'plugin:jsx-a11y/recommended',
+  'prettier',
+  'plugin:prettier/recommended',
+  'plugin:promise/recommended',
+  'plugin:markdown/recommended',
+];
+const testExtends = [
+  'plugin:jest/all',
+  'plugin:jest-react/recommended',
+  'plugin:testing-library/react',
+];
+
+const defaultPlugins = [
+  '@typescript-eslint',
+  'react',
+  'react-hooks',
+  'jsx-a11y',
+  'import',
+  'import-helpers',
+  'no-storage',
+  'prettier',
+  'promise',
+  'markdown',
+];
+const testPlugins = ['jest', 'jest-react', 'no-only-tests', 'testing-library'];
+
 module.exports = {
   root: true,
   env: {
@@ -67,42 +104,8 @@ module.exports = {
       version: require('jest/package.json').version,
     },
   },
-  extends: [
-    'eslint:recommended',
-    'airbnb',
-    'airbnb-typescript',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:react/all',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-    'airbnb/hooks',
-    'plugin:jsx-a11y/recommended',
-    'plugin:jest/all',
-    'plugin:jest-react/recommended',
-    'prettier',
-    'plugin:prettier/recommended',
-    'plugin:promise/recommended',
-    'plugin:markdown/recommended',
-    'plugin:testing-library/react',
-  ],
-  plugins: [
-    '@typescript-eslint',
-    'react',
-    'react-hooks',
-    'jsx-a11y',
-    'jest',
-    'jest-react',
-    'import',
-    'import-helpers',
-    'no-only-tests',
-    'no-storage',
-    'prettier',
-    'promise',
-    'markdown',
-    'testing-library',
-  ],
+  extends: defaultExtends,
+  plugins: defaultPlugins,
   rules: {
     '@typescript-eslint/comma-dangle': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
@@ -132,9 +135,6 @@ module.exports = {
       },
     ],
     'import/no-cycle': 0,
-    'jest/no-conditional-expect': 0,
-    'jest/no-hooks': 0,
-    'jest/require-hook': 0,
     'jsx-a11y/control-has-associated-label': 0,
     'no-alert': 2,
     'no-console': [
@@ -218,14 +218,15 @@ module.exports = {
   },
   overrides: [
     {
-      // Enable eslint-plugin-testing-library rules or preset only for matching testing files!
-      files: ['**/*.test.[jt]s?(x)'],
-      extends: [
-        'plugin:testing-library/react',
-        'plugin:jest/recommended',
-        'plugin:jest/style',
-      ],
+      // Enable testing extensions, plugins and rules only for matching testing files!
+      files: ['**/*.test.[jt]s?(x)', '**/*/__tests__/*.[jt]s?(x)'],
+      extends: [...defaultExtends, ...testExtends],
+      plugins: [...defaultPlugins, ...testPlugins],
       rules: {
+        'jest/max-expects': 0,
+        'jest/no-conditional-expect': 0,
+        'jest/no-hooks': 0,
+        'jest/require-hook': 0,
         'testing-library/await-async-query': 0,
         'testing-library/no-await-sync-query': 0,
         'testing-library/no-debugging-utils': 2,
