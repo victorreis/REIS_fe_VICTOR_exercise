@@ -1,5 +1,3 @@
-import React from 'react';
-
 import UserOverview from '@pages/UserOverview';
 import { render, screen } from '@testing-library/react';
 
@@ -17,6 +15,7 @@ jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
 
 describe('userOverview', () => {
   it('should render UserOverview', () => {
+    expect.assertions(3);
     render(<UserOverview />);
 
     expect(screen.getByText('Test User')).toBeInTheDocument();

@@ -1,17 +1,18 @@
-import { fireEvent, render, screen } from '@testing-library/react';
 import Card from '@components/Card';
 import { Team } from '@models/Team';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 const mockUseNavigate = jest.fn();
 
-jest.mock('react-router-dom', () => ({
+jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockUseNavigate,
 }));
 
-describe('Card', () => {
+describe('card', () => {
   it('should render card with single column', () => {
-    var columns = [{ key: 'columnKey', value: 'columnValue' }];
+    expect.assertions(2);
+    const columns = [{ key: 'columnKey', value: 'columnValue' }];
     render(<Card columns={columns} />);
 
     expect(screen.getByText('columnKey')).toBeInTheDocument();
@@ -19,7 +20,8 @@ describe('Card', () => {
   });
 
   it('should render card with multiple columns', () => {
-    var columns = [
+    expect.assertions(7);
+    const columns = [
       { key: 'columnKey1', value: 'columnValue1' },
       { key: 'columnKey2', value: 'columnValue2' },
       { key: 'columnKey3', value: 'columnValue3' },
@@ -37,6 +39,7 @@ describe('Card', () => {
   });
 
   it('should navigate when card is clicked and navigation is enabled', () => {
+    expect.assertions(1);
     const navProps = {
       id: '1',
       name: 'Team 1',
@@ -44,8 +47,8 @@ describe('Card', () => {
     render(
       <Card
         columns={[{ key: 'columnKey', value: 'columnValue' }]}
-        url="path"
         navigationProps={navProps}
+        url="path"
       />
     );
 
@@ -55,6 +58,7 @@ describe('Card', () => {
   });
 
   it('should not navigate when card is clicked and navigation is disabled', () => {
+    expect.assertions(1);
     render(
       <Card
         columns={[{ key: 'columnKey', value: 'columnValue' }]}

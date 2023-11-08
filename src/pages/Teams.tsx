@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { TeamsService } from '@api/teams';
 import { Container } from '@components/GlobalComponents';
 import Header from '@components/Header';

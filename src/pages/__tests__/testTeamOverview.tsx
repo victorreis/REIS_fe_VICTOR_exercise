@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { TeamsService } from '@api/teams';
 import { UsersService } from '@api/users';
 import TeamOverview from '@pages/TeamOverview';
@@ -31,6 +29,7 @@ describe('teamOverview', () => {
   });
 
   it('should render team overview users', async () => {
+    expect.assertions(1);
     const teamOverview = {
       id: '1',
       teamLeadId: '2',
