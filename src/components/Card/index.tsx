@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
+import { CardContainer } from '@components/Card/styles';
 import { Team } from '@models/Team';
 import { UserData } from '@models/User';
-
-import { Container } from './styles';
 
 export interface CardProps {
   id?: string;
@@ -21,16 +20,16 @@ const Card = ({
   columns,
   url,
   hasNavigation = true,
-  navigationProps = null,
+  navigationProps,
 }: CardProps): JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <Container
+    <CardContainer
       data-testid={`cardContainer-${id}`}
       hasNavigation={hasNavigation}
-      onClick={(e: Event) => {
-        if (hasNavigation) {
+      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (hasNavigation && url) {
           navigate(url, {
             state: navigationProps,
           });
@@ -43,7 +42,7 @@ const Card = ({
           <strong>{columnKey}</strong>&nbsp;{value}
         </p>
       ))}
-    </Container>
+    </CardContainer>
   );
 };
 
