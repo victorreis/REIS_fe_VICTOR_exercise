@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { Item } from '@models/Item';
-import { Team } from '@models/Team';
+
 import { TeamsService } from '@api/teams';
+import { Container } from '@components/GlobalComponents';
 import Header from '@components/Header';
 import List from '@components/List';
-import { Container } from '@components/GlobalComponents';
+import { Item } from '@models/Item';
+import { Team } from '@models/Team';
 
-var MapT = (teams: Team[]) => {
+const MapT = (teams: Team[]) => {
   return teams.map((team) => {
-    var columns = [
+    const columns = [
       {
         key: 'Name',
         value: team.name,
@@ -38,8 +39,8 @@ const Teams = () => {
 
   return (
     <Container>
-      <Header title="Teams" showBackButton={false} />
-      <List items={MapT(teams)} isLoading={isLoading} />
+      <Header showBackButton={false} title="Teams" />
+      <List isLoading={isLoading} items={MapT(teams)} />
     </Container>
   );
 };

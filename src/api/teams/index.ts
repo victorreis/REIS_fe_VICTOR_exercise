@@ -1,5 +1,5 @@
-import { Team, TeamOverview } from '@models/Team';
 import { getData } from '@api/fetcher';
+import { Team, TeamOverview } from '@models/Team';
 
 const getAll = (): Promise<Team[]> => {
   return getData('teams');

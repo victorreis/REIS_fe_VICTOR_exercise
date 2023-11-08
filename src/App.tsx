@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import TeamOverview from './pages/TeamOverview';
 import Teams from './pages/Teams';
 import UserOverview from './pages/UserOverview';
 
 export const App = () => {
-  var router = createBrowserRouter([
+  const router = createBrowserRouter([
     {
       path: '/',
       element: <Teams />,

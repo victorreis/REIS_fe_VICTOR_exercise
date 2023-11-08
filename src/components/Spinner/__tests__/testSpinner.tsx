@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { render, screen } from '@testing-library/react';
+
 import { Spinner } from '..';
 
-describe('Spinner', () => {
+describe('spinner', () => {
   it('should render spinner', () => {
     render(<Spinner />);
 
