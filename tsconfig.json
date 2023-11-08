@@ -44,6 +44,7 @@
     "typeRoots": [
       "node_modules/@types",
       "node_modules/@testing-library",
+      "src/types",
       "types"
     ],
     "types": ["node", "jest", "react", "react-dom", "vite/client"],
@@ -57,6 +58,13 @@
         "minify": true
       }
     ],
+    "paths": {
+      "@api/*": ["./src/api/*"],
+      "@components/*": ["./src/components/*"],
+      "@configs/*": ["./src/configs"],
+      "@models/*": ["./src/models/*"],
+      "@pages/*": ["./src/pages/*"]
+    },
 
     /* JavaScript Support */
     "allowJs": true,

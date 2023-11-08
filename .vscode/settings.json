@@ -49,6 +49,8 @@
   "html.format.enable": false,
   "javascript.format.enable": false,
   "javascript.validate.enable": true,
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "json.format.enable": false,
   "search.exclude": {
     "**/*.spec.ts": true,
@@ -70,6 +72,7 @@
   "stylelint.validate": ["css", "postcss", "scss", "typescript"],
   "stylelint.reportNeedlessDisables": true,
   "tsimporter.filesToScan": ["src/**/*.ts", "src/**/*.tsx"],
-  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.tsdk": "node_modules/typescript/lib"
 }
