@@ -1,11 +1,48 @@
-# Ignore artifacts:
-package.json
-tsconfig.json
-build/
-coverage/
-node_modules/
-README.md
-public/
-.eslintrc.json
-.prettierrc.json
-package-lock.json
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+browser
+
+# profiling files
+chrome-profiler-events*.json
+reports
+
+# IDE - VSCode
+.history/*
+
+# compiled output
+dist
+lib
+tmp
+out-tsc
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.eslintcache
+connect.lock
+libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+typings
+fixtures
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tsbuildinfo
+
+# ESLINT ONLY
+__snapshots__
