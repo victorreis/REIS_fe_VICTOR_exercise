@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { Container } from './styles';
-import { UserData } from '@models/User';
+
 import { Team } from '@models/Team';
+import { UserData } from '@models/User';
+
+import { Container } from './styles';
 
 interface Props {
   id?: string;

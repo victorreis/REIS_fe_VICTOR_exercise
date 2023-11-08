@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
+
+import { TeamsService } from '@api/teams';
+import { UsersService } from '@api/users';
 import Card from '@components/Card';
 import { Container } from '@components/GlobalComponents';
 import Header from '@components/Header';
 import List from '@components/List';
 import { Item } from '@models/Item';
 import { UserData } from '@models/User';
-import { TeamsService } from '@api/teams';
-import { UsersService } from '@api/users';
 
-var mapArray = (users: UserData[]) => {
+const mapArray = (users: UserData[]) => {
   return users.map((u) => {
-    var columns = [
+    const columns = [
       {
         key: 'Name',
         value: `${u.firstName} ${u.lastName}`,
@@ -34,8 +35,8 @@ var mapArray = (users: UserData[]) => {
   }) as Item[];
 };
 
-var mapTLead = (tlead) => {
-  var columns = [
+const mapTLead = (tlead) => {
+  const columns = [
     {
       key: 'Team Lead',
       value: '',
@@ -54,7 +55,7 @@ var mapTLead = (tlead) => {
     },
   ];
   return (
-    <Card columns={columns} url={`/user/${tlead.id}`} navigationProps={tlead} />
+    <Card columns={columns} navigationProps={tlead} url={`/user/${tlead.id}`} />
   );
 };
 
@@ -70,13 +71,13 @@ const TeamOverview = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
-    var getTeamUsers = async () => {
+    const getTeamUsers = async () => {
       const { teamLeadId, teamMemberIds = [] } =
         await TeamsService.getOverviewById(teamId);
       const teamLead = await UsersService.getById(teamLeadId);
 
       const teamMembers = [];
-      for (var teamMemberId of teamMemberIds) {
+      for (const teamMemberId of teamMemberIds) {
         const data = await UsersService.getById(teamMemberId);
         teamMembers.push(data);
       }
@@ -94,8 +95,8 @@ const TeamOverview = () => {
       <Header title={`Team ${location.state.name}`} />
       {!isLoading && mapTLead(pageData.teamLead)}
       <List
-        items={mapArray(pageData?.teamMembers ?? [])}
         isLoading={isLoading}
+        items={mapArray(pageData?.teamMembers ?? [])}
       />
     </Container>
   );

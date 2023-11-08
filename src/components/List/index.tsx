@@ -1,6 +1,7 @@
-import { Item } from '@models/Item';
 import Card from '@components/Card';
 import { Spinner } from '@components/Spinner';
+import { Item } from '@models/Item';
+
 import { Container } from './styles';
 
 interface Props {
@@ -12,16 +13,16 @@ interface Props {
 const List = ({ items, hasNavigation = true, isLoading }: Props) => {
   return (
     <Container>
-      {isLoading && <Spinner />}
+      {isLoading ? <Spinner /> : null}
       {!isLoading &&
         items.map(({ url, id, columns, navigationProps }, index) => {
           return (
             <Card
               key={`${id}-${index}`}
-              id={id}
               columns={columns}
-              navigationProps={navigationProps}
               hasNavigation={hasNavigation}
+              id={id}
+              navigationProps={navigationProps}
               url={url}
             />
           );
