@@ -1,7 +1,6 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Teams } from '../types';
-import Card from '..';
+import Card from '@components/Card';
+import { Team } from '@models/Team';
 
 const mockUseNavigate = jest.fn();
 
@@ -41,7 +40,7 @@ describe('Card', () => {
     const navProps = {
       id: '1',
       name: 'Team 1',
-    } as Teams;
+    } as Team;
     render(
       <Card
         columns={[{ key: 'columnKey', value: 'columnValue' }]}

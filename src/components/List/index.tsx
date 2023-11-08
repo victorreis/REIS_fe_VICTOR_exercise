@@ -1,10 +1,10 @@
-import { ListItem } from '../types';
-import Card from '../Card';
-import { Spinner } from '../Spinner';
+import { Item } from '@models/Item';
+import Card from '@components/Card';
+import { Spinner } from '@components/Spinner';
 import { Container } from './styles';
 
 interface Props {
-  items?: ListItem[];
+  items?: Item[];
   hasNavigation?: boolean;
   isLoading: string;
 }
