@@ -1,0 +1,17 @@
+{
+  "processors": ["stylelint-processor-styled-components"],
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-prettier",
+    "stylelint-config-styled-components"
+  ],
+  "customSyntax": "@stylelint/postcss-css-in-js",
+  "ignoreFiles": ["**/*.d.ts", "**/*.tsx"],
+  "packageManager": "yarn",
+  "sintax": "css-in-js",
+  "fix": true,
+  "rules": {
+    "property-no-vendor-prefix": null,
+    "media-query-no-invalid": null
+  }
+}
