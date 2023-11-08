@@ -203,6 +203,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 0,
     'react/jsx-props-no-spreading': 0,
     'react/jsx-no-useless-fragment': [2, { allowExpressions: true }],
+    'react/prefer-read-only-props': 0,
     'react/prop-types': 0,
     'react/require-default-props': 0,
     'react/self-closing-comp': [
