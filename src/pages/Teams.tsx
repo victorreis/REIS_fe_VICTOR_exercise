@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { TeamsService } from '@api/teams';
 import { Container } from '@components/GlobalComponents';
 import Header from '@components/Header';
@@ -23,10 +25,10 @@ const MapT = (teams: Team[]) => {
 };
 
 const Teams = () => {
-  const [teams, setTeams] = React.useState<any>([]);
-  const [isLoading, setIsLoading] = React.useState<any>(true);
+  const [teams, setTeams] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<any>(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getTeams = async () => {
       const response = await TeamsService.getAll();
       setTeams(response);

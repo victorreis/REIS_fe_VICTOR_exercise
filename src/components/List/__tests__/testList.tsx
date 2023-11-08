@@ -1,6 +1,5 @@
+import List from '@components/List';
 import { render, screen } from '@testing-library/react';
-
-import List from '..';
 
 jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

@@ -1,6 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-import { HeaderContainer, NavigationHeader, BackButton, Title } from './styles';
+import {
+  HeaderContainer,
+  NavigationHeader,
+  BackButton,
+  Title,
+} from '@components/Header/styles';
 
 export interface HeaderProps {
   title: string;

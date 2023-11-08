@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import { TeamsService } from '@api/teams';
@@ -66,10 +67,10 @@ interface PageState {
 const TeamOverview = () => {
   const location = useLocation();
   const { teamId } = useParams();
-  const [pageData, setPageData] = React.useState<PageState>({});
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [pageData, setPageData] = useState<PageState>({});
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getTeamUsers = async () => {
       const { teamLeadId, teamMemberIds = [] } =
         await TeamsService.getOverviewById(teamId);
