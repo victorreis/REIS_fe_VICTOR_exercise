@@ -20,7 +20,7 @@ The main objective of this project is to show some development skills through so
 - React.js
 - React Hooks
 - TypeScript
-<!-- - CSS-in-JS (styled-components) -->
+- CSS-in-JS (styled-components)
 - Unity tests (Jest + React Testing Library)
 - Linters (eslint, style-lint, lint-staged)
 - Formatters (editorconfig, prettier)
@@ -28,7 +28,6 @@ The main objective of this project is to show some development skills through so
 - conventional-commits (commitizen)
 - Scaffolding (scaffdog)
 - Environment config (.vscode/\*, .npmrc)
-<!-- - Thematization -->
 - Usability
 - Responsivity
 - Clean Code
@@ -58,7 +57,7 @@ The main objective of this project is to show some development skills through so
 
 - Friendly messages to show the user some success/error status.
 - High level of quality (strong eslint/typescript rules, scaffolding, separation of responsibilities, tests, pre-commit with type-check/linting/tests etc).
-<!-- - Create a lot of components through the styled-components with a well organized structure of files (instead of using third part libraries). -->
+- Create a lot of components through the styled-components with a well organized structure of files (instead of using third part libraries).
 - Unity tests in the component styles, behaviors, snapshots etc.
 - Global tests configuration that provides a simple and standardized way to render the components through the React Testing Renderer or through React Testing Library.
 - Implements responsiveness to allow any screen size by using @media queries, flexbox and Grid Layout.
