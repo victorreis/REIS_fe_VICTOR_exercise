@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import TeamOverview from '@pages/TeamOverview';
+
 import { TeamsService } from '@api/teams';
 import { UsersService } from '@api/users';
+import TeamOverview from '@pages/TeamOverview';
+import { render, screen, waitFor } from '@testing-library/react';
 
-jest.mock('react-router-dom', () => ({
+jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
   useLocation: () => ({
     state: {
       teamName: 'Some Team',
@@ -16,7 +17,7 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
-describe('TeamOverview', () => {
+describe('teamOverview', () => {
   beforeAll(() => {
     jest.useFakeTimers();
   });
@@ -45,10 +46,8 @@ describe('TeamOverview', () => {
     };
     jest
       .spyOn(TeamsService, 'getOverviewById')
-      .mockImplementationOnce(() => Promise.resolve({} as any));
-    jest
-      .spyOn(UsersService, 'getById')
-      .mockImplementationOnce(() => Promise.resolve({} as any));
+      .mockResolvedValueOnce({} as any);
+    jest.spyOn(UsersService, 'getById').mockResolvedValueOnce({} as any);
 
     render(<TeamOverview />);
 

@@ -1,14 +1,17 @@
 import React from 'react';
+
 import { render, screen } from '@testing-library/react';
+
 import List from '..';
 
-jest.mock('react-router-dom', () => ({
-  ...(jest.requireActual('react-router-dom') as any),
+jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
   useNavigate: () => jest.fn(),
 }));
 
-describe('List', () => {
+describe('list', () => {
   it('should render spinner and not render items when it is loading', () => {
+    expect.assertions(2);
     const items = [
       {
         id: '1',
@@ -27,6 +30,7 @@ describe('List', () => {
   });
 
   it('should not render spinner and render items when it is not loading', () => {
+    expect.assertions(2);
     const items = [
       {
         id: '1',
@@ -45,6 +49,7 @@ describe('List', () => {
   });
 
   it('should render multiple card when multiple items', () => {
+    expect.assertions(2);
     const items = [
       {
         id: '1',

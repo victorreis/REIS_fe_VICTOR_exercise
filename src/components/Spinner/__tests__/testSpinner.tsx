@@ -6,6 +6,7 @@ import { Spinner } from '..';
 
 describe('spinner', () => {
   it('should render spinner', () => {
+    expect.assertions(1);
     render(<Spinner />);
 
     expect(screen.getByTestId('spinner')).toBeInTheDocument();

@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import UserOverview from '@pages/UserOverview';
 
-jest.mock('react-router-dom', () => ({
+import UserOverview from '@pages/UserOverview';
+import { render, screen } from '@testing-library/react';
+
+jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
   useLocation: () => ({
     state: {
       firstName: 'Test',
@@ -14,7 +15,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => ({}),
 }));
 
-describe('UserOverview', () => {
+describe('userOverview', () => {
   it('should render UserOverview', () => {
     render(<UserOverview />);
 

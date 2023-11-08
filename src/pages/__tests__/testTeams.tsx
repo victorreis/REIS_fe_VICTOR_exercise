@@ -1,3 +1,5 @@
+import { TeamsService } from '@api/teams';
+import Teams from '@pages/Teams';
 import {
   fireEvent,
   render,
@@ -5,10 +7,8 @@ import {
   waitFor,
   act,
 } from '@testing-library/react';
-import Teams from '@pages/Teams';
-import { TeamsService } from '@api/teams';
 
-jest.mock('react-router-dom', () => ({
+jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
   useLocation: () => ({
     state: {
       firstName: 'Test',
@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => ({}),
 }));
 
-describe('Teams', () => {
+describe('teams', () => {
   beforeAll(() => {
     jest.useFakeTimers();
   });
@@ -33,9 +33,7 @@ describe('Teams', () => {
     jest.useRealTimers();
   });
 
-  it('should render spinner while loading', async () => {
-    // TODO - Add code for this test
-  });
+  it.todo('should render spinner while loading');
 
   it('should render teams list', async () => {
     jest.spyOn(TeamsService, 'getAll').mockResolvedValue([
