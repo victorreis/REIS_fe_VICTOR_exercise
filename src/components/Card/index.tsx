@@ -5,7 +5,7 @@ import { UserData } from '@models/User';
 
 import { Container } from './styles';
 
-interface Props {
+export interface CardProps {
   id?: string;
   url?: string;
   columns: Array<{
@@ -22,7 +22,7 @@ const Card = ({
   url,
   hasNavigation = true,
   navigationProps = null,
-}: Props): JSX.Element => {
+}: CardProps): JSX.Element => {
   const navigate = useNavigate();
 
   return (

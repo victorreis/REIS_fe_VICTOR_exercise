@@ -4,13 +4,13 @@ import { Item } from '@models/Item';
 
 import { Container } from './styles';
 
-interface Props {
+export interface ListProps {
   items?: Item[];
   hasNavigation?: boolean;
   isLoading: string;
 }
 
-const List = ({ items, hasNavigation = true, isLoading }: Props) => {
+const List = ({ items, hasNavigation = true, isLoading }: ListProps) => {
   return (
     <Container>
       {isLoading ? <Spinner /> : null}
