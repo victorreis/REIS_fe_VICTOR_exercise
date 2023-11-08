@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
-import { UserData } from '../types';
-import Card from '../components/Card';
-import { Container } from '../components/GlobalComponents';
-import Header from '../components/Header';
+import { UserData } from '@models/User';
+import Card from '@components/Card';
+import { Container } from '@components/GlobalComponents';
+import Header from '@components/Header';
 
 var mapU = (user: UserData) => {
   var columns = [

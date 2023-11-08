@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import * as API from '../../api';
-import TeamOverview from '../TeamOverview';
+import TeamOverview from '@pages/TeamOverview';
+import { TeamsService } from '@api/teams';
+import { UsersService } from '@api/users';
 
 jest.mock('react-router-dom', () => ({
   useLocation: () => ({
@@ -43,10 +44,10 @@ describe('TeamOverview', () => {
       avatar: '',
     };
     jest
-      .spyOn(API, 'getTeamOverview')
+      .spyOn(TeamsService, 'getOverviewById')
       .mockImplementationOnce(() => Promise.resolve({} as any));
     jest
-      .spyOn(API, 'getUserData')
+      .spyOn(UsersService, 'getById')
       .mockImplementationOnce(() => Promise.resolve({} as any));
 
     render(<TeamOverview />);

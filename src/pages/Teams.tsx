@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { ListItem, Teams as TeamsList } from '../types';
-import { getTeams as fetchTeams } from '../api';
-import Header from '../components/Header';
-import List from '../components/List';
-import { Container } from '../components/GlobalComponents';
+import { Item } from '@models/Item';
+import { Team } from '@models/Team';
+import { TeamsService } from '@api/teams';
+import Header from '@components/Header';
+import List from '@components/List';
+import { Container } from '@components/GlobalComponents';
 
-var MapT = (teams: TeamsList[]) => {
+var MapT = (teams: Team[]) => {
   return teams.map((team) => {
     var columns = [
       {
@@ -18,7 +19,7 @@ var MapT = (teams: TeamsList[]) => {
       url: `/team/${team.id}`,
       columns,
       navigationProps: team,
-    } as ListItem;
+    } as Item;
   });
 };
 
@@ -28,7 +29,7 @@ const Teams = () => {
 
   React.useEffect(() => {
     const getTeams = async () => {
-      const response = await fetchTeams();
+      const response = await TeamsService.getAll();
       setTeams(response);
       setIsLoading(false);
     };

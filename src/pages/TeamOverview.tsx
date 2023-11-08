@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { ListItem, UserData } from '../types';
-import { getTeamOverview, getUserData } from '../api';
-import Card from '../components/Card';
-import { Container } from '../components/GlobalComponents';
-import Header from '../components/Header';
-import List from '../components/List';
+import Card from '@components/Card';
+import { Container } from '@components/GlobalComponents';
+import Header from '@components/Header';
+import List from '@components/List';
+import { Item } from '@models/Item';
+import { UserData } from '@models/User';
+import { TeamsService } from '@api/teams';
+import { UsersService } from '@api/users';
 
 var mapArray = (users: UserData[]) => {
   return users.map((u) => {
@@ -29,7 +31,7 @@ var mapArray = (users: UserData[]) => {
       columns,
       navigationProps: u,
     };
-  }) as ListItem[];
+  }) as Item[];
 };
 
 var mapTLead = (tlead) => {
@@ -69,12 +71,13 @@ const TeamOverview = () => {
 
   React.useEffect(() => {
     var getTeamUsers = async () => {
-      const { teamLeadId, teamMemberIds = [] } = await getTeamOverview(teamId);
-      const teamLead = await getUserData(teamLeadId);
+      const { teamLeadId, teamMemberIds = [] } =
+        await TeamsService.getOverviewById(teamId);
+      const teamLead = await UsersService.getById(teamLeadId);
 
       const teamMembers = [];
       for (var teamMemberId of teamMemberIds) {
-        const data = await getUserData(teamMemberId);
+        const data = await UsersService.getById(teamMemberId);
         teamMembers.push(data);
       }
       setPageData({

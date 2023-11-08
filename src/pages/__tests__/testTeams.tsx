@@ -5,8 +5,8 @@ import {
   waitFor,
   act,
 } from '@testing-library/react';
-import * as API from '../../api';
-import Teams from '../Teams';
+import Teams from '@pages/Teams';
+import { TeamsService } from '@api/teams';
 
 jest.mock('react-router-dom', () => ({
   useLocation: () => ({
@@ -38,7 +38,7 @@ describe('Teams', () => {
   });
 
   it('should render teams list', async () => {
-    jest.spyOn(API, 'getTeams').mockResolvedValue([
+    jest.spyOn(TeamsService, 'getAll').mockResolvedValue([
       {
         id: '1',
         name: 'Team1',
