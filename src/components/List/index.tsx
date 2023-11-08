@@ -1,8 +1,7 @@
 import Card from '@components/Card';
+import { ListContainer } from '@components/List/styles';
 import { Spinner } from '@components/Spinner';
 import { Item } from '@models/Item';
-
-import { Container } from './styles';
 
 export interface ListProps {
   items?: Item[];
@@ -11,23 +10,26 @@ export interface ListProps {
 }
 
 const List = ({ items, hasNavigation = true, isLoading }: ListProps) => {
+  const showItems = !isLoading && items;
   return (
-    <Container>
+    <ListContainer>
       {isLoading ? <Spinner /> : null}
-      {!isLoading &&
-        items.map(({ url, id, columns, navigationProps }, index) => {
-          return (
-            <Card
-              key={`${id}-${index}`}
-              columns={columns}
-              hasNavigation={hasNavigation}
-              id={id}
-              navigationProps={navigationProps}
-              url={url}
-            />
-          );
-        })}
-    </Container>
+
+      {showItems
+        ? items.map(({ url, id, columns, navigationProps }) => {
+            return (
+              <Card
+                key={id}
+                columns={columns}
+                hasNavigation={hasNavigation}
+                id={id}
+                navigationProps={navigationProps}
+                url={url}
+              />
+            );
+          })
+        : null}
+    </ListContainer>
   );
 };
 
