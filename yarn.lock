@@ -2290,7 +2290,7 @@
     semver "^7.5.4"
     ts-api-utils "^1.0.1"
 
-"@typescript-eslint/utils@5.62.0", "@typescript-eslint/utils@^5.10.0":
+"@typescript-eslint/utils@5.62.0", "@typescript-eslint/utils@^5.10.0", "@typescript-eslint/utils@^5.58.0":
   version "5.62.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.62.0.tgz#141e809c71636e4a75daa39faed2fb5f4b10df86"
   integrity sha512-n8oxjeb5aIbPFEtmQxQYOLI0i9n5ySBEY/ZEHHZqKQSFnxio1rv6dthascc9dLuwrL0RC5mPCxB7vnAVGAYWAQ==
@@ -4120,6 +4120,16 @@ eslint-plugin-n@^15.6.1:
     resolve "^1.22.1"
     semver "^7.3.8"
 
+eslint-plugin-no-only-tests@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-no-only-tests/-/eslint-plugin-no-only-tests-3.1.0.tgz#f38e4935c6c6c4842bf158b64aaa20c366fe171b"
+  integrity sha512-Lf4YW/bL6Un1R6A76pRZyE1dl1vr31G/ev8UzIc/geCgFWyrKil8hVjYqWVKGB/UIGmb6Slzs9T0wNezdSVegw==
+
+eslint-plugin-no-storage@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-no-storage/-/eslint-plugin-no-storage-1.0.2.tgz#b32b2f00c4084f8e70c6c4ea79704ffe28b6caad"
+  integrity sha512-INY2pA4ynTsPIb7wP6+j1QEzDx+zVZ1rZsQkC3up+TQLXsVGg3AnYSqDv/LlwR1QPfh4fDEgQ2Hg5Zxk2XxxEw==
+
 eslint-plugin-prettier@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-5.0.1.tgz#a3b399f04378f79f066379f544e42d6b73f11515"
@@ -4159,6 +4169,13 @@ eslint-plugin-react@^7.33.2:
     resolve "^2.0.0-next.4"
     semver "^6.3.1"
     string.prototype.matchall "^4.0.8"
+
+eslint-plugin-testing-library@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-6.1.0.tgz#6f4fbc50dfbac100b0c6083b1e6b06cea9a86feb"
+  integrity sha512-r7kE+az3tbp8vyRwfyAGZ6V/xw+XvdWFPicIo6jbOPZoossOFDeHizARqPGV6gEkyF8hyCFhhH3mlQOGS3N5Sg==
+  dependencies:
+    "@typescript-eslint/utils" "^5.58.0"
 
 eslint-scope@^5.1.1:
   version "5.1.1"
