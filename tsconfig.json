@@ -1,26 +1,121 @@
 {
+  /* Visit https://aka.ms/tsconfig.json to read more about this file */
+  "compileOnSave": true,
+  "include": ["*.ts", "src/**/*"],
+  "exclude": [
+    "**/node_modules",
+    "**/.*",
+    "**/build",
+    "**/docs",
+    "**/lib",
+    "**/dist",
+    "**/reports",
+    "**/__mocks__"
+  ],
   "compilerOptions": {
-    "target": "es2015",
-    "baseUrl": "src",
-    "noImplicitAny": false,
+    /* Projects */
+    "incremental": true,
+    // "composite": true,
+    // "tsBuildInfoFile": "./",
+    // "disableSourceOfProjectReferenceRedirect": true,
+    // "disableSolutionSearching": true,
+    // "disableReferencedProjectLoad": true,
+    "disableSizeLimit": true,
+
+    /* Language and Environment */
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "es5", "esnext", "WebWorker"],
+    "jsx": "react-jsx",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    // "jsxFactory": "",
+    // "jsxFragmentFactory": "",
+    // "jsxImportSource": "react-jsx",
+    // "reactNamespace": "",
+    // "noLib": true,
+    "useDefineForClassFields": true,
+
+    /* Modules */
     "module": "esnext",
-    "jsx": "react",
-    "allowJs": true,
+    // "rootDir": "./",
     "moduleResolution": "node",
-    "alwaysStrict": false,
-    "strictNullChecks": false,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    // "rootDirs": [],
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@testing-library",
+      "types"
+    ],
+    "types": ["node", "jest", "react", "react-dom", "vite/client"],
+    // "allowUmdGlobalAccess": true,
+    "resolveJsonModule": true,
+    // "noResolve": true,
+    "plugins": [
+      {
+        "transform": "typescript-plugin-styled-components",
+        "type": "config",
+        "minify": true
+      }
+    ],
+
+    /* JavaScript Support */
+    "allowJs": true,
+    // "checkJs": true,
+    // "maxNodeModuleJsDepth": 1,
+
+    /* Emit */
+    // "declaration": true,
+    // "declarationMap": true,
+    // "emitDeclarationOnly": true,
+    "sourceMap": true,
+    // "outFile": "./",
+    "outDir": "./build",
+    "removeComments": true,
+    "noEmit": true,
+    "importHelpers": true,
+    // "importsNotUsedAsValues": "remove",
     "downlevelIteration": true,
+    // "sourceRoot": "",
+    // "mapRoot": "",
+    "inlineSources": true,
+    // "emitBOM": true,
+    "newLine": "lf",
+    // "stripInternal": true,
+    "noEmitHelpers": true,
+    "noEmitOnError": true,
+    // "preserveConstEnums": true,
+    // "declarationDir": "./",
+    // "preserveValueImports": true,
+
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": ["DOM", "ESNext", "WebWorker"],
-    "outDir": "dist",
-    "paths": {
-      "error-boundaries": ["./component/common/ErrorBoundaries.tsx"],
-      "test-utils": ["test-utils"],
-      "@temposoftware/tempo-i18n": ["./translate.ts"]
-    }
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+    "preserveSymlinks": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    // "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    // "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    // "allowUnusedLabels": true,
+    // "allowUnreachableCode": true,
+
+    /* Completeness */
+    "skipLibCheck": true
+  }
 }
