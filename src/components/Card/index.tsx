@@ -23,18 +23,20 @@ const Card = ({
   const navigate = useNavigate();
   if (!url || !navigationProps || !columns || columns.length === 0) return null;
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault();
+    if (hasNavigation && url) {
+      navigate(url, {
+        state: navigationProps,
+      });
+    }
+  };
+
   return (
     <CardContainer
+      $hasNavigation={hasNavigation}
       data-testid={`cardContainer-${id}`}
-      hasNavigation={hasNavigation}
-      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if (hasNavigation && url) {
-          navigate(url, {
-            state: navigationProps,
-          });
-        }
-        e.preventDefault();
-      }}
+      onClick={handleClick}
     >
       {columns.map(({ key, value }) => (
         <p key={key}>

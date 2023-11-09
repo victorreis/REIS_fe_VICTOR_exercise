@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CardContainer = styled.div<{ hasNavigation: boolean }>`
+export const CardContainer = styled.div<{ $hasNavigation: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +10,6 @@ export const CardContainer = styled.div<{ hasNavigation: boolean }>`
   padding: 20px;
   width: 250px;
   max-height: 200px;
-  cursor: ${(props) => (props.hasNavigation ? 'pointer' : 'default')};
+  cursor: ${({ $hasNavigation }) => ($hasNavigation ? 'pointer' : 'default')};
   margin: 5px;
 `;

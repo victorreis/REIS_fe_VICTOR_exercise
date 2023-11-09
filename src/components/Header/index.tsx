@@ -14,17 +14,16 @@ export interface HeaderProps {
 
 const Header = ({ title, showBackButton = true }: HeaderProps) => {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(-1);
+  };
+
   return (
     <HeaderContainer>
       <NavigationHeader>
         {showBackButton ? (
-          <BackButton
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            🔙
-          </BackButton>
+          <BackButton onClick={handleClick}>🔙</BackButton>
         ) : null}
         <Title>{title}</Title>
       </NavigationHeader>
