@@ -19,18 +19,16 @@ const List = ({ items, hasNavigation = true, isLoading }: ListProps) => {
       {isLoading ? <Spinner /> : null}
 
       {showItems
-        ? items.map(({ url, id, columns, navigationProps }) => {
-            return (
-              <Card
-                key={id}
-                columns={columns}
-                hasNavigation={hasNavigation}
-                id={id}
-                navigationProps={navigationProps}
-                url={url}
-              />
-            );
-          })
+        ? items.map(({ url, id, columns, navigationProps }) => (
+            <Card
+              key={id}
+              columns={columns}
+              hasNavigation={hasNavigation}
+              id={id}
+              navigationProps={navigationProps}
+              url={url}
+            />
+          ))
         : null}
       {showEmptyListMessage ? <>No items to show.</> : null}
     </ListContainer>
