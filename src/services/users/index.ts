@@ -1,8 +1,8 @@
-import { getData } from '@api/fetcher';
 import { UserData } from '@models/User';
+import { fetcher } from '@services/fetcher';
 
 const getById = (userId: string): Promise<UserData> => {
-  return getData(`users/${userId}`);
+  return fetcher(`users/${userId}`);
 };
 
 export const UsersService = {
