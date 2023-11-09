@@ -10,27 +10,28 @@ export interface ListProps {
 }
 
 const List = ({ items, hasNavigation = true, isLoading }: ListProps) => {
-  if (!items || items.length === 0) return null;
+  const showItems = !isLoading && items && items.length > 0;
 
-  const showItems = !isLoading && items;
   return (
     <ListContainer>
       {isLoading ? <Spinner /> : null}
 
-      {showItems
-        ? items.map(({ url, id, columns, navigationProps }) => {
-            return (
-              <Card
-                key={id}
-                columns={columns}
-                hasNavigation={hasNavigation}
-                id={id}
-                navigationProps={navigationProps}
-                url={url}
-              />
-            );
-          })
-        : null}
+      {showItems ? (
+        items.map(({ url, id, columns, navigationProps }) => {
+          return (
+            <Card
+              key={id}
+              columns={columns}
+              hasNavigation={hasNavigation}
+              id={id}
+              navigationProps={navigationProps}
+              url={url}
+            />
+          );
+        })
+      ) : (
+        <>No items to show.</>
+      )}
     </ListContainer>
   );
 };
