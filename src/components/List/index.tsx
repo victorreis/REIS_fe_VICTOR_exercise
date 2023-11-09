@@ -6,7 +6,7 @@ import { Item } from '@models/Item';
 export interface ListProps {
   items?: Item[];
   hasNavigation?: boolean;
-  isLoading: string;
+  isLoading: boolean;
 }
 
 const List = ({ items, hasNavigation = true, isLoading }: ListProps) => {
