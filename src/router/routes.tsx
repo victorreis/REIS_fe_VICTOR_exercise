@@ -6,15 +6,15 @@ import UserOverview from '@pages/UserOverview';
 
 export const routes = createBrowserRouter([
   {
-    path: '/',
-    element: <Teams />,
-  },
-  {
     path: '/team/:teamId',
     element: <TeamOverview />,
   },
   {
     path: '/user/:useId',
     element: <UserOverview />,
+  },
+  {
+    path: '/',
+    element: <Teams />,
   },
 ]);
