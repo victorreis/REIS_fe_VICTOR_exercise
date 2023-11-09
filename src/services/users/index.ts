@@ -33,7 +33,7 @@ const mapToItem = (user: User): Item => {
     id: user.id,
     url: `/user/${user.id}`,
     columns,
-    navigationProps: user,
+    navigationProps: { type: 'user', ...user },
   };
 };
 

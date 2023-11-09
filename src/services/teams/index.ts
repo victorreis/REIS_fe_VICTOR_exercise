@@ -23,7 +23,7 @@ const mapToItem = (team: Team): Item => {
     id: team.id,
     url: `/team/${team.id}`,
     columns,
-    navigationProps: team,
+    navigationProps: { type: 'team', ...team },
   };
 };
 
