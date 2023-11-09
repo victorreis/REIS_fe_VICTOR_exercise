@@ -4,5 +4,5 @@ export interface User {
   lastName: string;
   displayName: string;
   location: string;
-  avatar: string;
+  avatarUrl: string;
 }
