@@ -1,40 +1,23 @@
-import { useNavigate } from 'react-router-dom';
-
 import { CardContainer } from '@components/Card/styles';
 import { Column } from '@models/Column';
-import { Team } from '@models/Team';
-import { User } from '@models/User';
 
 export interface CardProps {
   id?: string;
-  url?: string;
   columns: Column[];
-  hasNavigation?: boolean;
-  navigationProps?: User | Team;
+  onClick?: () => void;
 }
 
-const Card = ({
-  id,
-  columns,
-  url,
-  hasNavigation = true,
-  navigationProps,
-}: CardProps): JSX.Element | null => {
-  const navigate = useNavigate();
-  if (!url || !navigationProps || !columns || columns.length === 0) return null;
+const Card = ({ id, columns, onClick }: CardProps): JSX.Element | null => {
+  if (!columns || columns.length === 0) return null;
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-    if (hasNavigation && url) {
-      navigate(url, {
-        state: navigationProps,
-      });
-    }
+    if (onClick) onClick();
   };
 
   return (
     <CardContainer
-      $hasNavigation={hasNavigation}
+      $clickable={Boolean(onClick)}
       data-testid={`cardContainer-${id}`}
       onClick={handleClick}
     >
