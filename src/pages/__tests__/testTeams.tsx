@@ -1,12 +1,6 @@
 import { TeamsService } from '@api/teams';
 import Teams from '@pages/Teams';
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  act,
-} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
   useLocation: () => ({
@@ -36,6 +30,7 @@ describe('teams', () => {
   it.todo('should render spinner while loading');
 
   it('should render teams list', async () => {
+    expect.assertions(2);
     jest.spyOn(TeamsService, 'getAll').mockResolvedValue([
       {
         id: '1',
