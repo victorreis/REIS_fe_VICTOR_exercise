@@ -1,7 +1,6 @@
 {
-  /* Visit https://aka.ms/tsconfig.json to read more about this file */
   "compileOnSave": true,
-  "include": ["*.ts", "src/**/*"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": [
     "**/node_modules",
     "**/.*",
@@ -13,34 +12,19 @@
     "**/__mocks__"
   ],
   "compilerOptions": {
-    /* Projects */
     "incremental": true,
-    // "composite": true,
-    // "tsBuildInfoFile": "./",
-    // "disableSourceOfProjectReferenceRedirect": true,
-    // "disableSolutionSearching": true,
-    // "disableReferencedProjectLoad": true,
     "disableSizeLimit": true,
 
-    /* Language and Environment */
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "es5", "esnext", "WebWorker"],
     "jsx": "react-jsx",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    // "jsxFactory": "",
-    // "jsxFragmentFactory": "",
-    // "jsxImportSource": "react-jsx",
-    // "reactNamespace": "",
-    // "noLib": true,
     "useDefineForClassFields": true,
 
-    /* Modules */
     "module": "esnext",
-    // "rootDir": "./",
     "moduleResolution": "node",
     "baseUrl": "./",
-    // "rootDirs": [],
     "typeRoots": [
       "node_modules/@types",
       "node_modules/@testing-library",
@@ -48,9 +32,7 @@
       "types"
     ],
     "types": ["node", "jest", "react", "react-dom", "vite/client"],
-    // "allowUmdGlobalAccess": true,
     "resolveJsonModule": true,
-    // "noResolve": true,
     "plugins": [
       {
         "transform": "typescript-plugin-styled-components",
@@ -59,78 +41,55 @@
       }
     ],
     "paths": {
-      "@api/*": ["./src/api/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@configs/*": ["./src/configs/*"],
-      "@contexts/*": ["./src/contexts/*"],
-      "@features/*": ["./src/features/*"],
-      "@models/*": ["./src/models/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@services/*": ["./src/services/*"],
-      "@theme/*": ["./src/theme/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@api/*": ["src/api/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@configs/*": ["src/configs/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@features/*": ["src/features/*"],
+      "@models/*": ["src/models/*"],
+      "@pages/*": ["src/pages/*"],
+      "@routes/*": ["src/routes/*"],
+      "@services/*": ["src/services/*"],
+      "@theme/*": ["src/theme/*"],
+      "@utils/*": ["src/utils/*"]
     },
 
-    /* JavaScript Support */
     "allowJs": true,
-    // "checkJs": true,
-    // "maxNodeModuleJsDepth": 1,
 
-    /* Emit */
-    // "declaration": true,
-    // "declarationMap": true,
-    // "emitDeclarationOnly": true,
     "sourceMap": true,
-    // "outFile": "./",
     "outDir": "./build",
     "removeComments": true,
     "noEmit": true,
     "importHelpers": true,
-    // "importsNotUsedAsValues": "remove",
     "downlevelIteration": true,
-    // "sourceRoot": "",
-    // "mapRoot": "",
     "inlineSources": true,
-    // "emitBOM": true,
     "newLine": "lf",
-    // "stripInternal": true,
     "noEmitHelpers": true,
     "noEmitOnError": true,
-    // "preserveConstEnums": true,
-    // "declarationDir": "./",
-    // "preserveValueImports": true,
 
-    /* Interop Constraints */
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "preserveSymlinks": true,
     "forceConsistentCasingInFileNames": true,
 
-    /* Type Checking */
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
-    // "strictPropertyInitialization": true,
     "noImplicitThis": true,
     "useUnknownInCatchVariables": true,
     "alwaysStrict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    // "exactOptionalPropertyTypes": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    // "allowUnusedLabels": true,
-    // "allowUnreachableCode": true,
 
-    /* Completeness */
     "skipLibCheck": true
   }
 }
