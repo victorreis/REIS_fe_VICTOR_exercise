@@ -2,7 +2,6 @@ import { Column } from '@models/Column';
 import { Item } from '@models/Item';
 import { Team, TeamOverview } from '@models/Team';
 import { fetcher } from '@services/fetcher';
-import { hasAllValuesDefined } from '@utils/objects';
 
 const getAll = (): Promise<Team[]> => {
   return fetcher('teams');
@@ -12,9 +11,7 @@ const getOverviewById = (teamId: string): Promise<TeamOverview> => {
   return fetcher(`teams/${teamId}`);
 };
 
-const mapToItem = (team?: Partial<Team> | undefined): Item | undefined => {
-  if (!team || !hasAllValuesDefined(team)) return undefined;
-
+const mapToItem = (team: Team): Item => {
   const columns: Column[] = [
     {
       key: 'Name',
@@ -30,9 +27,7 @@ const mapToItem = (team?: Partial<Team> | undefined): Item | undefined => {
   };
 };
 
-const mapTeamsToItems = (teams?: Partial<Team>[]): Item[] => {
-  if (!teams) return [];
-
+const mapTeamsToItems = (teams: Team[]): Item[] => {
   return teams
     .map(mapToItem)
     .filter((item): item is Item => item !== undefined);
