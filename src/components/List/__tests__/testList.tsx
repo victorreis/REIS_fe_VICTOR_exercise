@@ -2,11 +2,6 @@ import List from '@components/List';
 import { Item } from '@models/Item';
 import { render, screen } from '@testing-library/react';
 
-jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => jest.fn(),
-}));
-
 describe('list', () => {
   it('should render spinner and not render items when it is loading', () => {
     expect.assertions(2);

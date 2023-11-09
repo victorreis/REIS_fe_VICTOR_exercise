@@ -5,29 +5,26 @@ import { Item } from '@models/Item';
 
 export interface ListProps {
   items?: Item[];
-  hasNavigation?: boolean;
   isLoading: boolean;
+  onClick?: (item: Item) => void;
 }
 
-const List = ({ items, hasNavigation = true, isLoading }: ListProps) => {
+const List = ({ items, isLoading, onClick }: ListProps) => {
   const hasItems = items && items.length > 0;
   const showItems = !isLoading && hasItems;
   const showEmptyListMessage = !isLoading && !hasItems;
+
+  const handleClick = (item: Item) => () => {
+    if (onClick) onClick(item);
+  };
 
   return (
     <ListContainer>
       {isLoading ? <Spinner /> : null}
 
       {showItems
-        ? items.map(({ url, id, columns, navigationProps }) => (
-            <Card
-              key={id}
-              columns={columns}
-              hasNavigation={hasNavigation}
-              id={id}
-              navigationProps={navigationProps}
-              url={url}
-            />
+        ? items.map((item) => (
+            <Card key={item.id} onClick={handleClick(item)} {...item} />
           ))
         : null}
       {showEmptyListMessage ? <>No items to show.</> : null}
