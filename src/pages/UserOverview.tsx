@@ -3,36 +3,27 @@ import { useLocation } from 'react-router-dom';
 import Card from '@components/Card';
 import { Container } from '@components/GlobalComponents';
 import Header from '@components/Header';
-import { UserData } from '@models/User';
+import { User } from '@models/User';
+import { hasAllValuesDefined } from '@utils/objects';
 
-const mapU = (user: UserData) => {
-  const columns = [
-    {
-      key: 'Name',
-      value: `${user.firstName} ${user.lastName}`,
-    },
-    {
-      key: 'Display Name',
-      value: user.displayName,
-    },
-    {
-      key: 'Location',
-      value: user.location,
-    },
-  ];
-  return (
-    <Card columns={columns} hasNavigation={false} navigationProps={user} />
-  );
-};
+import { UsersService } from '../services/users/index';
+
+export interface LocationState {
+  state?: Partial<User>;
+}
 
 const UserOverview = () => {
-  const location = useLocation();
+  const { state: user } = useLocation() as LocationState;
+  if (!hasAllValuesDefined(user)) return null;
+
+  const columns = UsersService.mapToColumns(user);
+
   return (
     <Container>
-      <Header
-        title={`User ${location.state.firstName} ${location.state.lastName}`}
-      />
-      {mapU(location.state)}
+      <Header title={`User ${user.firstName} ${user.lastName}`} />
+      {columns ? (
+        <Card columns={columns} hasNavigation={false} navigationProps={user} />
+      ) : null}
     </Container>
   );
 };
