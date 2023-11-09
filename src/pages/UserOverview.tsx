@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 
 import Card from '@components/Card';
-import { Container } from '@components/GlobalComponents';
+import { Container } from '@components/Container';
 import Header from '@components/Header';
 import { User } from '@models/User';
 import { hasAllValuesDefined } from '@utils/objects';

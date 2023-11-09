@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import Card from '@components/Card';
-import { Container } from '@components/GlobalComponents';
+import { Container } from '@components/Container';
 import Header from '@components/Header';
 import List from '@components/List';
 import { User } from '@models/User';

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Container } from '@components/GlobalComponents';
+import { Container } from '@components/Container';
 import Header from '@components/Header';
 import List from '@components/List';
 import { Team } from '@models/Team';
