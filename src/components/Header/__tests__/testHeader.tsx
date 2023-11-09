@@ -9,6 +9,8 @@ jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
 }));
 
 describe('header', () => {
+  const header = 'Header';
+
   beforeAll(() => {
     jest.useFakeTimers();
   });
@@ -23,31 +25,31 @@ describe('header', () => {
 
   it('should render header', () => {
     expect.assertions(1);
-    render(<Header title="Header" />);
+    render(<Header title={header} />);
 
     expect(screen.getByText('Header')).toBeInTheDocument();
   });
 
   it('should render back button in header', () => {
     expect.assertions(1);
-    render(<Header showBackButton title="Header" />);
+    render(<Header showBackButton title={header} />);
 
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
   it('should not render back button in header', () => {
     expect.assertions(1);
-    render(<Header showBackButton={false} title="Header" />);
+    render(<Header showBackButton={false} title={header} />);
 
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
   it('should navigate back when back button is clicked', () => {
     expect.assertions(1);
-    render(<Header showBackButton title="Header" />);
+    render(<Header showBackButton title={header} />);
 
     fireEvent.click(screen.getByRole('button'));
 
-    expect(mockUseNavigate).toHaveBeenCalled();
+    expect(mockUseNavigate).toHaveBeenCalledTimes(1);
   });
 });
