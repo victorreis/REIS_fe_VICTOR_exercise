@@ -10,6 +10,8 @@ export interface ListProps {
 }
 
 const List = ({ items, hasNavigation = true, isLoading }: ListProps) => {
+  if (!items || items.length === 0) return null;
+
   const showItems = !isLoading && items;
   return (
     <ListContainer>

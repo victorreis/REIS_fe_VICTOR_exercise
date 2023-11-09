@@ -19,8 +19,9 @@ const Card = ({
   url,
   hasNavigation = true,
   navigationProps,
-}: CardProps): JSX.Element => {
+}: CardProps): JSX.Element | null => {
   const navigate = useNavigate();
+  if (!url || !navigationProps || !columns || columns.length === 0) return null;
 
   return (
     <CardContainer
