@@ -1,4 +1,5 @@
 import List from '@components/List';
+import { Item } from '@models/Item';
 import { render, screen } from '@testing-library/react';
 
 jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
@@ -9,7 +10,7 @@ jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
 describe('list', () => {
   it('should render spinner and not render items when it is loading', () => {
     expect.assertions(2);
-    const items = [
+    const items: Item[] = [
       {
         id: '1',
         columns: [
@@ -28,7 +29,7 @@ describe('list', () => {
 
   it('should not render spinner and render items when it is not loading', () => {
     expect.assertions(2);
-    const items = [
+    const items: Item[] = [
       {
         id: '1',
         columns: [
@@ -47,7 +48,7 @@ describe('list', () => {
 
   it('should render multiple card when multiple items', () => {
     expect.assertions(2);
-    const items = [
+    const items: Item[] = [
       {
         id: '1',
         columns: [

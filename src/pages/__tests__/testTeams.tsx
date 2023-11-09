@@ -1,5 +1,5 @@
-import { TeamsService } from '@api/teams';
 import Teams from '@pages/Teams';
+import { TeamsService } from '@services/teams';
 import { render, screen, waitFor } from '@testing-library/react';
 
 jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({

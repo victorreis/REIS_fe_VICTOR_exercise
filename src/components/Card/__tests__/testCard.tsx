@@ -1,4 +1,5 @@
 import Card from '@components/Card';
+import { Column } from '@models/Column';
 import { Team } from '@models/Team';
 import { fireEvent, render, screen } from '@testing-library/react';
 
@@ -10,9 +11,11 @@ jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
 }));
 
 describe('card', () => {
+  const url = 'path';
+
   it('should render card with single column', () => {
     expect.assertions(2);
-    const columns = [{ key: 'columnKey', value: 'columnValue' }];
+    const columns: Column[] = [{ key: 'columnKey', value: 'columnValue' }];
     render(<Card columns={columns} />);
 
     expect(screen.getByText('columnKey')).toBeInTheDocument();
@@ -21,7 +24,7 @@ describe('card', () => {
 
   it('should render card with multiple columns', () => {
     expect.assertions(7);
-    const columns = [
+    const columns: Column[] = [
       { key: 'columnKey1', value: 'columnValue1' },
       { key: 'columnKey2', value: 'columnValue2' },
       { key: 'columnKey3', value: 'columnValue3' },
@@ -40,21 +43,21 @@ describe('card', () => {
 
   it('should navigate when card is clicked and navigation is enabled', () => {
     expect.assertions(1);
-    const navProps = {
+    const navProps: Team = {
       id: '1',
       name: 'Team 1',
-    } as Team;
+    };
     render(
       <Card
         columns={[{ key: 'columnKey', value: 'columnValue' }]}
         navigationProps={navProps}
-        url="path"
+        url={url}
       />
     );
 
     fireEvent.click(screen.getByText('columnKey'));
 
-    expect(mockUseNavigate).toHaveBeenCalledWith('path', { state: navProps });
+    expect(mockUseNavigate).toHaveBeenCalledWith(url, { state: navProps });
   });
 
   it('should not navigate when card is clicked and navigation is disabled', () => {

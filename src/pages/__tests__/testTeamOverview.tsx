@@ -1,6 +1,6 @@
-import { TeamsService } from '@api/teams';
-import { UsersService } from '@api/users';
 import TeamOverview from '@pages/TeamOverview';
+import { TeamsService } from '@services/teams';
+import { UsersService } from '@services/users';
 import { render, screen, waitFor } from '@testing-library/react';
 
 jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
@@ -30,19 +30,19 @@ describe('teamOverview', () => {
 
   it('should render team overview users', async () => {
     expect.assertions(1);
-    const teamOverview = {
-      id: '1',
-      teamLeadId: '2',
-      teamMemberIds: ['3', '4', '5'],
-    };
-    const userData = {
-      id: '2',
-      firstName: 'userData',
-      lastName: 'userData',
-      displayName: 'userData',
-      location: '',
-      avatar: '',
-    };
+    // const teamOverview: TeamOverview = {
+    //   id: '1',
+    //   teamLeadId: '2',
+    //   teamMemberIds: ['3', '4', '5'],
+    // };
+    // const user: User = {
+    //   id: '2',
+    //   firstName: 'userData',
+    //   lastName: 'userData',
+    //   displayName: 'userData',
+    //   location: '',
+    //   avatar: '',
+    // };
     jest
       .spyOn(TeamsService, 'getOverviewById')
       .mockResolvedValueOnce({} as any);

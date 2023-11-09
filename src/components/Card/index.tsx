@@ -1,18 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 
 import { CardContainer } from '@components/Card/styles';
+import { Column } from '@models/Column';
 import { Team } from '@models/Team';
-import { UserData } from '@models/User';
+import { User } from '@models/User';
 
 export interface CardProps {
   id?: string;
   url?: string;
-  columns: Array<{
-    key: string;
-    value: string;
-  }>;
+  columns: Column[];
   hasNavigation?: boolean;
-  navigationProps?: UserData | Team;
+  navigationProps?: User | Team;
 }
 
 const Card = ({
@@ -37,9 +35,9 @@ const Card = ({
         e.preventDefault();
       }}
     >
-      {columns.map(({ key: columnKey, value }) => (
-        <p key={columnKey}>
-          <strong>{columnKey}</strong>&nbsp;{value}
+      {columns.map(({ key, value }) => (
+        <p key={key}>
+          <strong>{key}</strong>&nbsp;{value}
         </p>
       ))}
     </CardContainer>
