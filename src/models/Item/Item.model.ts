@@ -6,5 +6,5 @@ export interface Item {
   id: string;
   url?: string;
   columns: Column[];
-  navigationProps?: User | Team;
+  navigationProps?: ({ type: 'user' } & User) | ({ type: 'team' } & Team);
 }
