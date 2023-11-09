@@ -5,6 +5,7 @@ import React, { createElement, FC } from 'react';
 import { create } from 'react-test-renderer';
 
 import { render } from '@testing-library/react';
+import fetchMock from 'jest-fetch-mock';
 
 import '@testing-library/jest-dom';
 
@@ -29,3 +30,5 @@ const renderRTRCreator = <ComponentProps extends Record<string, any>>(
 global.React = React;
 export * from '@testing-library/react';
 export { renderJestDomCreator, renderRTRCreator };
+fetchMock.enableMocks();
+fetchMock.dontMock();
