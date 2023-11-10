@@ -9,7 +9,7 @@ export type SearchProps<T extends object> = {
   value: string;
   items: SearchItem<T>[];
   keysToSearch?: string[];
-  onChange?: (newValue: string, items: T[]) => void;
+  onChange?: (newValue: string, items: SearchItem<T>[]) => void;
 };
 
 const Search = <T extends object>({
@@ -34,10 +34,7 @@ const Search = <T extends object>({
       });
     });
 
-    onChange(
-      newValue,
-      filteredItems.map((item) => item.item)
-    );
+    onChange(newValue, filteredItems);
   };
 
   return (

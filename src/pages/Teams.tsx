@@ -4,23 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import { Container } from '@components/Container';
 import Header from '@components/Header';
 import List from '@components/List';
-import Search from '@components/Search';
 import { Spinner } from '@components/Spinner';
 import { Item } from '@models/Item';
 import { Team } from '@models/Team';
 import { TeamsService } from '@services/teams';
+import { useSearch } from 'src/hooks/useSearch';
 
 const Teams = () => {
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [teams, setTeams] = useState<Team[]>([]);
-  const [teamsToBeShown, setTeamsToBeShown] = useState<Team[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { itemsToBeShown, renderedSearchInput } = useSearch({ items: teams });
 
   const getTeams = useCallback(async () => {
     const response = await TeamsService.getAll();
     setTeams(response);
-    setTeamsToBeShown(response);
     setIsLoading(false);
   }, []);
 
@@ -36,25 +34,16 @@ const Teams = () => {
     }
   };
 
-  const handleSearchChange = (newValue: string, filteredTeams: Team[]) => {
-    setSearchValue(newValue);
-    setTeamsToBeShown(filteredTeams);
-  };
-
   if (isLoading) return <Spinner />;
 
-  const searchItems = teams.map((team) => ({ id: team.id, item: team }));
   return (
     <Container>
       <Header showBackButton={false} title="Teams" />
-      <Search
-        items={searchItems}
-        onChange={handleSearchChange}
-        value={searchValue}
-      />
+      {renderedSearchInput}
+
       <List
         isLoading={isLoading}
-        items={TeamsService.mapToItems(teamsToBeShown)}
+        items={TeamsService.mapToItems(itemsToBeShown)}
         onClick={handleClick}
       />
     </Container>
