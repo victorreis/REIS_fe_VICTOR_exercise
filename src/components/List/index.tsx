@@ -18,10 +18,10 @@ const List = ({ items, isLoading, onClick }: ListProps) => {
     if (onClick) onClick(item);
   };
 
+  if (isLoading) return <Spinner />;
+
   return (
     <ListContainer>
-      {isLoading ? <Spinner /> : null}
-
       {showItems
         ? items.map((item) => (
             <Card key={item.id} onClick={handleClick(item)} {...item} />
