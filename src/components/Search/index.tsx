@@ -6,6 +6,7 @@ export type SearchItem<T extends object> = {
 };
 
 export type SearchProps<T extends object> = {
+  placeholder?: string;
   value: string;
   items: SearchItem<T>[];
   keysToSearch?: string[];
@@ -13,6 +14,7 @@ export type SearchProps<T extends object> = {
 };
 
 const Search = <T extends object>({
+  placeholder = 'Type to search...',
   value,
   items,
   keysToSearch,
@@ -39,7 +41,12 @@ const Search = <T extends object>({
 
   return (
     <SearchContainer>
-      <input data-testid="search-input" onChange={handleChange} value={value} />
+      <input
+        data-testid="search-input"
+        onChange={handleChange}
+        placeholder={placeholder}
+        value={value}
+      />
     </SearchContainer>
   );
 };

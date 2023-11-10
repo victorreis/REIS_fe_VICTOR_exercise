@@ -12,6 +12,7 @@ import { useSearch } from 'src/hooks/useSearch';
 
 const Teams = () => {
   const navigate = useNavigate();
+
   const [teams, setTeams] = useState<Team[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { itemsToBeShown, renderedSearchInput } = useSearch({ items: teams });
@@ -39,6 +40,8 @@ const Teams = () => {
   return (
     <Container>
       <Header showBackButton={false} title="Teams" />
+
+      <h3>Search for teams</h3>
       {renderedSearchInput}
 
       <List

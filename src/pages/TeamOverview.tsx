@@ -12,6 +12,7 @@ import { User } from '@models/User';
 import { ItemsService } from '@services/items';
 import { TeamsService } from '@services/teams';
 import { UsersService } from '@services/users';
+import { useSearch } from 'src/hooks/useSearch';
 
 type PageData = {
   team?: Team;
@@ -35,6 +36,9 @@ const TeamOverview = () => {
 
   const [pageData, setPageData] = useState<PageData>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { itemsToBeShown, renderedSearchInput } = useSearch({
+    items: pageData.teamMembers || [],
+  });
 
   const getTeamUsers = useCallback(async () => {
     if (!params.teamId) return;
@@ -77,16 +81,6 @@ const TeamOverview = () => {
     });
   };
 
-  const teamMembersView = pageData.teamMembers ? (
-    <List
-      isLoading={isLoading}
-      items={UsersService.mapUsersToItems(pageData.teamMembers)}
-      onClick={handleClickUsers}
-    />
-  ) : (
-    <Spinner />
-  );
-
   return (
     <Container>
       <Header title={`Team ${pageData.team?.name}`} />
@@ -96,7 +90,19 @@ const TeamOverview = () => {
         onClick={handleClickTeamLead}
         {...pageData.teamLead}
       />
-      {teamMembersView}
+
+      <h3>Search for team members</h3>
+      {renderedSearchInput}
+
+      {itemsToBeShown ? (
+        <List
+          isLoading={isLoading}
+          items={UsersService.mapUsersToItems(itemsToBeShown)}
+          onClick={handleClickUsers}
+        />
+      ) : (
+        <Spinner />
+      )}
     </Container>
   );
 };
