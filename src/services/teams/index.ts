@@ -1,13 +1,13 @@
 import { Column } from '@models/Column';
 import { Item } from '@models/Item';
-import { Team, TeamOverview } from '@models/Team';
+import { Team } from '@models/Team';
 import { fetcher } from '@services/fetcher';
 
 const getAll = (): Promise<Team[]> => {
   return fetcher('teams');
 };
 
-const getOverviewById = (teamId: string): Promise<TeamOverview> => {
+const getById = (teamId: string): Promise<Team> => {
   return fetcher(`teams/${teamId}`);
 };
 
@@ -35,7 +35,7 @@ const mapTeamsToItems = (teams: Team[]): Item[] => {
 
 export const TeamsService = {
   getAll,
-  getOverviewById,
+  getById,
   mapToItem,
   mapTeamsToItems,
 };
