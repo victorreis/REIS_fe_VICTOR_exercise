@@ -3,11 +3,11 @@ import { ListContainer } from '@components/List/styles';
 import { Spinner } from '@components/Spinner';
 import { Item } from '@models/Item';
 
-export interface ListProps {
+export type ListProps = {
   items?: Item[];
   isLoading: boolean;
   onClick?: (item: Item) => void;
-}
+};
 
 const List = ({ items, isLoading, onClick }: ListProps) => {
   const hasItems = items && items.length > 0;

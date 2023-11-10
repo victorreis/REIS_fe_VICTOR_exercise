@@ -168,6 +168,10 @@ module.exports = {
       },
     ],
     radix: 2,
+    'react/boolean-prop-naming': [
+      'error',
+      { rule: '^(is|has|show)[A-Z]([A-Za-z0-9]?)+' },
+    ],
     'react/destructuring-assignment': 2,
     'react/forbid-component-props': 0,
     'react/function-component-definition': [

@@ -12,12 +12,12 @@ import { User } from '@models/User';
 import { UsersService } from '../services/users/index';
 import { hasAllValuesDefined } from '../utils/objects/objects.utils';
 
-interface UserOverviewLocationState {
+type UserOverviewLocationState = {
   user?: User;
-}
-interface UserOverviewParams {
+};
+type UserOverviewParams = {
   userId?: string;
-}
+};
 
 const UserOverview = () => {
   const location = useLocation() as UserOverviewLocationState;

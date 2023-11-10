@@ -7,10 +7,10 @@ import {
   Title,
 } from '@components/Header/styles';
 
-export interface HeaderProps {
+export type HeaderProps = {
   title: string;
   showBackButton?: boolean;
-}
+};
 
 const Header = ({ title, showBackButton = true }: HeaderProps) => {
   const navigate = useNavigate();

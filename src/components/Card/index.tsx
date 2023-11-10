@@ -1,11 +1,11 @@
 import { CardContainer } from '@components/Card/styles';
 import { Column } from '@models/Column';
 
-export interface CardProps {
+export type CardProps = {
   id?: string;
   columns: Column[];
   onClick?: () => void;
-}
+};
 
 const Card = ({ id, columns, onClick }: CardProps): JSX.Element | null => {
   if (!columns || columns.length === 0) return null;

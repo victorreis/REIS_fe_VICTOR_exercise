@@ -1,10 +1,10 @@
-export interface Team {
+export type Team = {
   id: string;
   name: string;
-}
+};
 
-export interface TeamOverview {
+export type TeamOverview = {
   id: string;
   teamLeadId: string;
   teamMemberIds: string[];
-}
+};
