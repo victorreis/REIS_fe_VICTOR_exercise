@@ -27,7 +27,7 @@ const mapToItem = (team: Team): Item => {
   };
 };
 
-const mapTeamsToItems = (teams: Team[]): Item[] => {
+const mapToItems = (teams: Team[]): Item[] => {
   return teams
     .map(mapToItem)
     .filter((item): item is Item => item !== undefined);
@@ -37,5 +37,5 @@ export const TeamsService = {
   getAll,
   getById,
   mapToItem,
-  mapTeamsToItems,
+  mapToItems,
 };
