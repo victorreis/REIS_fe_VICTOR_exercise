@@ -12,15 +12,16 @@ import { User } from '@models/User';
 import { UsersService } from '../services/users/index';
 import { hasAllValuesDefined } from '../utils/objects/objects.utils';
 
-type UserOverviewLocationState = {
-  user?: User;
+type UserOverviewLocation = {
+  state?: { user?: User };
 };
+
 type UserOverviewParams = {
   userId?: string;
 };
 
 const UserOverview = () => {
-  const location = useLocation() as UserOverviewLocationState;
+  const location = useLocation() as UserOverviewLocation;
   const params = useParams() as UserOverviewParams;
 
   const [user, setUser] = useState<User | undefined>();
@@ -28,9 +29,9 @@ const UserOverview = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getUser = useCallback(async () => {
-    if (location.user && hasAllValuesDefined(location.user)) {
-      const mappedColumns = UsersService.mapToColumns(location.user);
-      setUser(location.user);
+    if (location.state?.user && hasAllValuesDefined(location.state.user)) {
+      const mappedColumns = UsersService.mapToColumns(location.state.user);
+      setUser(location.state.user);
       setColumns(mappedColumns);
       setIsLoading(false);
       return;
@@ -44,7 +45,7 @@ const UserOverview = () => {
       return;
     }
     console.error(NO_PARAMETER_NOR_NAVIGATION_DATA_PASSED);
-  }, [location.user, params.userId]);
+  }, [location.state?.user, params.userId]);
 
   useEffect(() => {
     getUser();
