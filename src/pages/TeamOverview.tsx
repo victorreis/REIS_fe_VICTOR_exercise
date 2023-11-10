@@ -1,69 +1,102 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Card from '@components/Card';
 import { Container } from '@components/Container';
 import Header from '@components/Header';
 import List from '@components/List';
+import { Spinner } from '@components/Spinner';
+import { Item } from '@models/Item';
+import { Team } from '@models/Team';
 import { User } from '@models/User';
+import { ItemsService } from '@services/items';
 import { TeamsService } from '@services/teams';
 import { UsersService } from '@services/users';
-import { hasAllValuesDefined } from '@utils/objects';
 
-interface PageState {
+type PageData = {
+  team?: Team;
   teamLead?: User;
   teamMembers?: User[];
-}
+};
 
-export interface LocationState {
-  state?: { name?: string };
-}
+// type TeamOverviewLocation = {
+//   team?: Partial<Team>;
+// };
+
+type TeamOverviewParams = {
+  teamId?: string;
+};
 
 const TeamOverview = () => {
-  const { state } = useLocation() as LocationState;
-  const { teamId } = useParams();
-  const [pageData, setPageData] = useState<PageState>({});
+  // const location = useLocation() as TeamOverviewLocation;
+  // console.log('>>>', { location });
+  const params = useParams() as TeamOverviewParams;
+  const navigate = useNavigate();
+
+  const [pageData, setPageData] = useState<PageData>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const getTeamUsers = useCallback(async () => {
+    if (!params.teamId) return;
+
+    const team = await TeamsService.getById(params.teamId);
+    const teamLead = await UsersService.getById(team.teamLeadId);
+    const teamMembers = await Promise.all(
+      team.teamMemberIds.map((teamMemberId) =>
+        UsersService.getById(teamMemberId)
+      )
+    );
+
+    setPageData({
+      team,
+      teamLead,
+      teamMembers,
+    });
+    setIsLoading(false);
+  }, [params.teamId]);
+
   useEffect(() => {
-    const getTeamUsers = async () => {
-      if (!teamId) return;
-
-      const { teamLeadId, teamMemberIds = [] } =
-        await TeamsService.getOverviewById(teamId);
-      const teamLead = await UsersService.getById(teamLeadId);
-
-      const teamMembers = await Promise.all(
-        teamMemberIds.map(async (teamMemberId) =>
-          UsersService.getById(teamMemberId)
-        )
-      );
-
-      setPageData({
-        teamLead,
-        teamMembers,
-      });
-      setIsLoading(false);
-    };
     getTeamUsers();
-  }, [teamId]);
+  }, [getTeamUsers, params.teamId]);
 
-  if (!teamId || !hasAllValuesDefined(state)) return null;
+  if (isLoading) return <Spinner />;
+  if (!pageData.teamLead) return null;
+  if (!pageData.teamMembers) return null;
+
+  const handleClickTeamLead = () => {
+    if (!pageData.teamLead) return;
+
+    navigate(`/user/${pageData.teamLead?.id}`, {
+      state: { user: pageData.teamLead },
+    });
+  };
+
+  const handleClickUsers = (item: Item) => {
+    navigate(`/user/${item?.id}`, {
+      state: { user: ItemsService.mapToUser(item) },
+    });
+  };
+
+  const teamMembersView = pageData.teamMembers ? (
+    <List
+      isLoading={isLoading}
+      items={UsersService.mapUsersToItems(pageData.teamMembers)}
+      onClick={handleClickUsers}
+    />
+  ) : (
+    <Spinner />
+  );
 
   return (
     <Container>
-      <Header title={`Team ${state.name}`} />
-      {!isLoading && (
-        <Card
-          columns={UsersService.mapTeamLeadToColumns(pageData.teamLead)}
-          navigationProps={pageData.teamLead}
-          url={`/user/${pageData.teamLead?.id}`}
-        />
-      )}
-      <List
-        isLoading={isLoading}
-        items={UsersService.mapUsersToItems(pageData.teamMembers)}
+      <Header title={`Team ${pageData.team?.name}`} />
+
+      <Card
+        columns={UsersService.mapTeamLeadToColumns(pageData.teamLead)}
+        onClick={handleClickTeamLead}
+        {...pageData.teamLead}
       />
+      {teamMembersView}
     </Container>
   );
 };
