@@ -1,15 +1,22 @@
 import styled from 'styled-components';
 
 export const CardContainer = styled.div<{ $clickable: boolean }>`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-  background: #ddd;
-  padding: 20px;
-  width: 250px;
-  max-height: 200px;
+  gap: 1rem;
+
+  width: 15rem;
+  padding: 1rem;
+  margin: 0.25rem;
+
+  background-color: #dddddd;
+  border: 1px solid #777777;
+  border-radius: 1rem;
   cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
-  margin: 5px;
+`;
+
+export const CardItem = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

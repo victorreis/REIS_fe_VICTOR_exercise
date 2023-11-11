@@ -1,4 +1,4 @@
-import { CardContainer } from '@components/Card/styles';
+import { CardContainer, CardItem } from '@components/Card/styles';
 import { Column } from '@models/Column';
 
 export type CardProps = {
@@ -22,9 +22,10 @@ const Card = ({ id, columns, onClick }: CardProps): JSX.Element | null => {
       onClick={handleClick}
     >
       {columns.map(({ key, value }) => (
-        <p key={key}>
-          <strong>{key}</strong>&nbsp;{value}
-        </p>
+        <CardItem key={key}>
+          <strong>{key}</strong>
+          {value}
+        </CardItem>
       ))}
     </CardContainer>
   );
