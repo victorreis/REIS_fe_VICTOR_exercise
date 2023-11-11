@@ -1,7 +1,7 @@
 import Card from '@components/Card';
 import { Column } from '@models/Column';
-import { Team } from '@models/Team';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { teamMock1 } from 'src/mocks/team';
 
 describe('card', () => {
   const mockOnClick = jest.fn();
@@ -36,16 +36,10 @@ describe('card', () => {
 
   it('should navigate when card is clicked and navigation is enabled', () => {
     expect.assertions(1);
-    const team: Team = {
-      id: 'team1',
-      name: 'Team 1 test',
-      teamLeadId: 'teamLead1',
-      teamMemberIds: ['teamMember1', 'teamMember2', 'teamMember3'],
-    };
     render(
       <Card
         columns={[{ key: 'columnKey', value: 'columnValue' }]}
-        id={team.id}
+        id={teamMock1.id}
         onClick={mockOnClick}
       />
     );

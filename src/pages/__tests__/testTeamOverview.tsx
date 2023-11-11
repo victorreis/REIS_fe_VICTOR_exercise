@@ -1,26 +1,49 @@
+/* eslint-disable react/jsx-no-literals */
+import { FunctionComponent, createElement } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
 import TeamOverview from '@pages/TeamOverview';
 import { TeamsService } from '@services/teams';
 import { UsersService } from '@services/users';
 import { render, screen, waitFor } from '@testing-library/react';
-
-jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
-  useLocation: () => ({
-    state: {
-      teamName: 'Some Team',
-    },
-  }),
-  useNavigate: () => ({}),
-  useParams: () => ({
-    teamId: '1',
-  }),
-}));
+import { teamMock1 } from 'src/mocks/team';
+import { userMock } from 'src/mocks/user';
 
 describe('teamOverview', () => {
+  // const mockUseLocation = jest.fn().mockReturnValue({
+  //   user: {
+  //     teamName: 'Some Team',
+  //   },
+  // });
+  // const mockUseNavigate = jest.fn();
+  // const mockUseParams = jest.fn().mockReturnValue({ teamId: '1' });
+  // jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
+  //   ...jest.requireActual('react-router-dom'),
+  //   useLocation: mockUseLocation,
+  //   useNavigate: mockUseNavigate,
+  //   useParams: mockUseParams,
+  // }));
+  // jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
+  //   ...jest.requireActual('react-router-dom'),
+  //   useLocation: jest.fn().mockImplementation(() => ({
+  //     user: {
+  //       teamName: 'Some Team',
+  //     },
+  //   })),
+  //   useNavigate: jest.fn().mockImplementation(() => ({})),
+  //   useParams: jest.fn().mockImplementation(() => ({ teamId: '1' })),
+  // }));
+
+  jest.spyOn(TeamsService, 'getById').mockResolvedValue(teamMock1);
+  jest.spyOn(UsersService, 'getById').mockResolvedValue(userMock);
+  // jest.spyOn(ALL, 'useParams').mockImplementation(() => ({ teamId: '1' }));
+
   beforeAll(() => {
     jest.useFakeTimers();
   });
 
   afterEach(() => {
+    // jest.clearAllMocks();
     jest.clearAllTimers();
   });
 
@@ -29,28 +52,33 @@ describe('teamOverview', () => {
   });
 
   it('should render team overview users', async () => {
-    expect.assertions(1);
-    // const teamOverview: TeamOverview = {
-    //   id: '1',
-    //   teamLeadId: '2',
-    //   teamMemberIds: ['3', '4', '5'],
-    // };
-    // const user: User = {
-    //   id: '2',
-    //   firstName: 'userData',
-    //   lastName: 'userData',
-    //   displayName: 'userData',
-    //   location: '',
-    //   avatar: '',
-    // };
-    jest
-      .spyOn(TeamsService, 'getOverviewById')
-      .mockResolvedValueOnce({} as any);
-    jest.spyOn(UsersService, 'getById').mockResolvedValueOnce({} as any);
+    expect.hasAssertions();
 
-    render(<TeamOverview />);
+    // render(
+    //   <BrowserRouter>
+    //     <TeamOverview />
+    //   </BrowserRouter>
+    // );
+
+    const renderWithRouter = (component: FunctionComponent<unknown>) => {
+      function Wrapper({ children }: React.PropsWithChildren) {
+        return (
+          <Routes>
+            <Route path="teams/1">{children}</Route>
+          </Routes>
+        );
+      }
+      render(createElement(component), { wrapper: Wrapper });
+      // return {
+      //   ...render(component, { wrapper: Wrapper }),
+      // };
+    };
+
+    // const { queryAllByText } = renderWithRouter(<TeamOverview />);
+    renderWithRouter(TeamOverview);
 
     await waitFor(() => {
+      // expect(screen.getByText('userData')).toBeTruthy();
       expect(screen.queryAllByText('userData')).toHaveLength(4);
     });
   });

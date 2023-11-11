@@ -1,20 +1,27 @@
-import Teams from '@pages/Teams';
+import { RouterProvider } from 'react-router-dom';
+
 import { TeamsService } from '@services/teams';
 import { render, screen, waitFor } from '@testing-library/react';
+import { teamsMock } from 'src/mocks/team';
+import { routes } from 'src/router/routes';
 
-jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
-  useLocation: () => ({
-    state: {
+describe('teams', () => {
+  const mockUseLocation = jest.fn().mockReturnValue({
+    user: {
       firstName: 'Test',
       lastName: 'User',
       displayName: 'userName',
       location: 'location',
     },
-  }),
-  useNavigate: () => ({}),
-}));
+  });
+  const mockUseNavigate = jest.fn().mockReturnValue({});
 
-describe('teams', () => {
+  jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useLocation: mockUseLocation,
+    useNavigate: mockUseNavigate,
+  }));
+
   beforeAll(() => {
     jest.useFakeTimers();
   });
@@ -31,22 +38,14 @@ describe('teams', () => {
 
   it('should render teams list', async () => {
     expect.assertions(2);
-    jest.spyOn(TeamsService, 'getAll').mockResolvedValue([
-      {
-        id: '1',
-        name: 'Team1',
-      },
-      {
-        id: '2',
-        name: 'Team2',
-      },
-    ]);
+    jest.spyOn(TeamsService, 'getAll').mockResolvedValue(teamsMock);
 
-    render(<Teams />);
+    render(<RouterProvider router={routes} />);
 
     await waitFor(() => {
-      expect(screen.getByText('Team1')).toBeInTheDocument();
+      teamsMock.forEach((team) => {
+        expect(screen.getByText(team.name)).toBeInTheDocument();
+      });
     });
-    expect(screen.getByText('Team2')).toBeInTheDocument();
   });
 });
