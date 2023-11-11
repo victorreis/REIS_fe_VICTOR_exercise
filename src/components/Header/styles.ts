@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
   width: 100%;
-  height: 5rem;
+  min-height: 5rem;
   display: flex;
   align-items: center;
   gap: 2rem;
   justify-content: space-between;
-  padding: 0 3rem;
+  padding: 0.5rem 3rem;
   border-bottom: 1px solid #777777;
   background-color: #dddddd;
 `;
@@ -28,4 +28,8 @@ export const BackButton = styled.button`
   outline: 0;
   border: 1px solid #777777;
   border-radius: 1rem;
+
+  &:hover {
+    background-color: #cccccc;
+  }
 `;

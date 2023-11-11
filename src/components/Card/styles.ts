@@ -4,6 +4,7 @@ export const CardContainer = styled.div<{ $clickable: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-height: 5rem;
 
   width: 15rem;
   padding: 1rem;
@@ -13,6 +14,10 @@ export const CardContainer = styled.div<{ $clickable: boolean }>`
   border: 1px solid #777777;
   border-radius: 1rem;
   cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
+
+  &:hover {
+    ${({ $clickable }) => ($clickable ? 'background-color: #cccccc' : '')}
+  }
 `;
 
 export const CardItem = styled.div`

@@ -8,4 +8,5 @@ export const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  padding-bottom: 2rem;
 `;
