@@ -1,4 +1,3 @@
-import { SearchContainer } from '@components/Search/styles';
 import { TextInput } from '@components/TextInput';
 
 export type SearchItem<T extends object> = {
@@ -40,14 +39,12 @@ const Search = <T extends object>({
   };
 
   return (
-    <SearchContainer>
-      <TextInput
-        data-testid="search-input"
-        onChange={handleChange}
-        placeholder={placeholder}
-        value={value}
-      />
-    </SearchContainer>
+    <TextInput
+      data-testid="search-input"
+      onChange={handleChange}
+      placeholder={placeholder}
+      value={value}
+    />
   );
 };
 

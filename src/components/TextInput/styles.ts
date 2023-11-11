@@ -4,7 +4,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin-top: 0.5rem;
+  margin: 0.5rem;
 `;
 
 export const InputIconsContainer = styled.div`
@@ -19,13 +19,10 @@ export const InputLabel = styled.div`
 export const Input = styled.input`
   width: 100%;
   height: 3rem;
-  margin: 0.5rem;
   margin-bottom: 0;
   padding: 0.5rem 1rem;
   box-sizing: border-box;
   background-color: white;
-  border-width: 1px;
-  border-color: #777;
-  border-style: solid;
+  border: 1px solid #777;
   border-radius: 1rem;
 `;

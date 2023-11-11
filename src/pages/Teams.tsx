@@ -15,7 +15,9 @@ const Teams = () => {
 
   const [teams, setTeams] = useState<Team[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { itemsToBeShown, renderedSearchInput } = useSearch({ items: teams });
+  const { itemsToBeShown, renderedSearchInput } = useSearch({
+    items: teams,
+  });
 
   const getTeams = useCallback(async () => {
     const response = await TeamsService.getAll();
@@ -38,7 +40,7 @@ const Teams = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <Container>
+    <Container data-testid="123123123">
       <Header showBackButton={false} title="Teams" />
 
       <h3>Search for teams</h3>

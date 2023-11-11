@@ -9,6 +9,10 @@ export const GlobalStyle = createGlobalStyle`
   * {
     font-family: sans-serif;
   }
+
+  h1,h2,h3,h4,h5,h6 {
+    margin: 1rem 0 0.5rem 0;
+  }
 `;
 
 export const ContainerScroll = styled.div`
