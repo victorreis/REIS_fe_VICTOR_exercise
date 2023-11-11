@@ -21,7 +21,6 @@ export const Input = styled.input`
   height: 3rem;
   margin-bottom: 0;
   padding: 0.5rem 1rem;
-  box-sizing: border-box;
   background-color: white;
   border: 1px solid #777;
   border-radius: 1rem;

@@ -1,13 +1,20 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
+  width: 100%;
   height: 5rem;
   display: flex;
   align-items: center;
   gap: 2rem;
+  justify-content: space-between;
+  padding: 0 3rem;
+  border-bottom: 1px solid #777777;
+  background-color: #dddddd;
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+  margin: 0;
+`;
 
 export const BackButton = styled.button`
   display: flex;

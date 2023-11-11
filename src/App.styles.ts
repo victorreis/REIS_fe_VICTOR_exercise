@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: sans-serif;
+    box-sizing: border-box;
   }
 
   h1,h2,h3,h4,h5,h6 {
@@ -40,6 +41,5 @@ export const ContainerScroll = styled.div`
 `;
 
 export const PageContainer = styled(ContainerScroll)`
-  padding: 0 2rem;
   height: 100vh;
 `;

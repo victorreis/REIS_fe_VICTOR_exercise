@@ -16,10 +16,10 @@ const Header = ({ title, showBackButton = true }: HeaderProps) => {
 
   return (
     <HeaderContainer>
+      <Title>{title}</Title>
       {showBackButton ? (
         <BackButton onClick={handleClick}>🔙</BackButton>
       ) : null}
-      <Title>{title}</Title>
     </HeaderContainer>
   );
 };

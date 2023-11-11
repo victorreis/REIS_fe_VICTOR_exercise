@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const CardContainer = styled.div<{ $clickable: boolean }>`
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 1rem;
