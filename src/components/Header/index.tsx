@@ -1,11 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import {
-  HeaderContainer,
-  NavigationHeader,
-  BackButton,
-  Title,
-} from '@components/Header/styles';
+import { HeaderContainer, BackButton, Title } from '@components/Header/styles';
 
 export type HeaderProps = {
   title: string;
@@ -21,12 +16,10 @@ const Header = ({ title, showBackButton = true }: HeaderProps) => {
 
   return (
     <HeaderContainer>
-      <NavigationHeader>
-        {showBackButton ? (
-          <BackButton onClick={handleClick}>🔙</BackButton>
-        ) : null}
-        <Title>{title}</Title>
-      </NavigationHeader>
+      {showBackButton ? (
+        <BackButton onClick={handleClick}>🔙</BackButton>
+      ) : null}
+      <Title>{title}</Title>
     </HeaderContainer>
   );
 };
