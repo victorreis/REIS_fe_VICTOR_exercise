@@ -1,11 +1,12 @@
 import { SearchContainer } from '@components/Search/styles';
+import { TextInput } from '@components/TextInput';
 
 export type SearchItem<T extends object> = {
   id: string;
   item: T;
 };
 
-export type SearchProps<T extends object> = {
+export type SearchProps<T extends object = object> = {
   placeholder?: string;
   value: string;
   items: SearchItem<T>[];
@@ -20,10 +21,9 @@ const Search = <T extends object>({
   keysToSearch,
   onChange,
 }: SearchProps<T>) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (newValue: string) => {
     if (!onChange) return;
 
-    const newValue = e.target.value || '';
     const filteredItems = items.filter((item) => {
       return Object.entries(item.item).some(([key, itemValue]) => {
         return (
@@ -41,7 +41,7 @@ const Search = <T extends object>({
 
   return (
     <SearchContainer>
-      <input
+      <TextInput
         data-testid="search-input"
         onChange={handleChange}
         placeholder={placeholder}

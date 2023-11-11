@@ -83,4 +83,5 @@ const TextInputComponent: ForwardRefRenderFunction<
     </InputContainer>
   );
 };
+
 export const TextInput = forwardRef(TextInputComponent);
