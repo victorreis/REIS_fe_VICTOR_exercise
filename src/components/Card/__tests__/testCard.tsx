@@ -37,8 +37,10 @@ describe('card', () => {
   it('should navigate when card is clicked and navigation is enabled', () => {
     expect.assertions(1);
     const team: Team = {
-      id: '1',
-      name: 'Team 1',
+      id: 'team1',
+      name: 'Team 1 test',
+      teamLeadId: 'teamLead1',
+      teamMemberIds: ['teamMember1', 'teamMember2', 'teamMember3'],
     };
     render(
       <Card
