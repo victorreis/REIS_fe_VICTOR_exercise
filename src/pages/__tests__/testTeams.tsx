@@ -1,54 +1,51 @@
-import * as React from 'react';
-import {fireEvent, render, screen, waitFor, act} from '@testing-library/react';
-import * as API from '../../api';
-import Teams from '../Teams';
+import { RouterProvider } from 'react-router-dom';
 
-jest.mock('react-router-dom', () => ({
-    useLocation: () => ({
-        state: {
-            firstName: 'Test',
-            lastName: 'User',
-            displayName: 'userName',
-            location: 'location',
-        },
-    }),
-    useNavigate: () => ({}),
-}));
+import { TeamsService } from '@services/teams';
+import { render, screen, waitFor } from '@testing-library/react';
+import { teamsMock } from 'src/mocks/team';
+import { routes } from 'src/router/routes';
 
-describe('Teams', () => {
-    beforeAll(() => {
-        jest.useFakeTimers();
+describe('teams', () => {
+  const mockUseLocation = jest.fn().mockReturnValue({
+    user: {
+      firstName: 'Test',
+      lastName: 'User',
+      displayName: 'userName',
+      location: 'location',
+    },
+  });
+  const mockUseNavigate = jest.fn().mockReturnValue({});
+
+  jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useLocation: mockUseLocation,
+    useNavigate: mockUseNavigate,
+  }));
+
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.clearAllTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
+  it.todo('should render spinner while loading');
+
+  it('should render teams list', async () => {
+    expect.assertions(2);
+    jest.spyOn(TeamsService, 'getAll').mockResolvedValue(teamsMock);
+
+    render(<RouterProvider router={routes} />);
+
+    await waitFor(() => {
+      teamsMock.forEach((team) => {
+        expect(screen.getByText(team.name)).toBeInTheDocument();
+      });
     });
-
-    afterEach(() => {
-        jest.clearAllTimers();
-    });
-
-    afterAll(() => {
-        jest.useRealTimers();
-    });
-
-    it('should render spinner while loading', async () => {
-        // TODO - Add code for this test
-    });
-
-    it('should render teams list', async () => {
-        jest.spyOn(API, 'getTeams').mockResolvedValue([
-            {
-                id: '1',
-                name: 'Team1',
-            },
-            {
-                id: '2',
-                name: 'Team2',
-            },
-        ]);
-
-        render(<Teams />);
-
-        await waitFor(() => {
-            expect(screen.getByText('Team1')).toBeInTheDocument();
-        });
-        expect(screen.getByText('Team2')).toBeInTheDocument();
-    });
+  });
 });

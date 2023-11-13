@@ -1,46 +1,58 @@
-import * as React from 'react';
-import {ListItem, Teams as TeamsList} from 'types';
-import {getTeams as fetchTeams} from '../api';
-import Header from '../components/Header';
-import List from '../components/List';
-import {Container} from '../components/GlobalComponents';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-var MapT = (teams: TeamsList[]) => {
-    return teams.map(team => {
-        var columns = [
-            {
-                key: 'Name',
-                value: team.name,
-            },
-        ];
-        return {
-            id: team.id,
-            url: `/team/${team.id}`,
-            columns,
-            navigationProps: team,
-        } as ListItem;
-    });
-};
+import { Container } from '@components/Container';
+import Header from '@components/Header';
+import List from '@components/List';
+import { Spinner } from '@components/Spinner';
+import { Item } from '@models/Item';
+import { Team } from '@models/Team';
+import { TeamsService } from '@services/teams';
+import { useSearch } from 'src/hooks/useSearch';
 
 const Teams = () => {
-    const [teams, setTeams] = React.useState<any>([]);
-    const [isLoading, setIsLoading] = React.useState<any>(true);
+  const navigate = useNavigate();
 
-    React.useEffect(() => {
-        const getTeams = async () => {
-            const response = await fetchTeams();
-            setTeams(response);
-            setIsLoading(false);
-        };
-        getTeams();
-    }, []);
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { itemsToBeShown, renderedSearchInput } = useSearch({
+    items: teams,
+  });
 
-    return (
-        <Container>
-            <Header title="Teams" showBackButton={false} />
-            <List items={MapT(teams)} isLoading={isLoading} />
-        </Container>
-    );
+  const getTeams = useCallback(async () => {
+    const response = await TeamsService.getAll();
+    setTeams(response);
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (teams.length === 0) getTeams();
+  }, [getTeams, teams.length]);
+
+  const handleClick = (item: Item) => {
+    if (item.url) {
+      navigate(item.url, {
+        state: { user: item.navigationProps },
+      });
+    }
+  };
+
+  if (isLoading) return <Spinner />;
+
+  return (
+    <Container data-testid="123123123">
+      <Header showBackButton={false} title="Teams" />
+
+      <h3>Search for teams</h3>
+      {renderedSearchInput}
+
+      <List
+        isLoading={isLoading}
+        items={TeamsService.mapToItems(itemsToBeShown)}
+        onClick={handleClick}
+      />
+    </Container>
+  );
 };
 
 export default Teams;

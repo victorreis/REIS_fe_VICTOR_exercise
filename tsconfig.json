@@ -1,26 +1,95 @@
 {
+  "compileOnSave": true,
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": [
+    "**/node_modules",
+    "**/.*",
+    "**/build",
+    "**/docs",
+    "**/lib",
+    "**/dist",
+    "**/reports",
+    "**/__mocks__"
+  ],
   "compilerOptions": {
-    "target": "es2015",
-    "baseUrl": "src",
-    "noImplicitAny": false,
+    "incremental": true,
+    "disableSizeLimit": true,
+
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "es5", "esnext", "WebWorker"],
+    "jsx": "react-jsx",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": true,
+
     "module": "esnext",
-    "jsx": "react",
-    "allowJs": true,
     "moduleResolution": "node",
-    "alwaysStrict": false,
-    "strictNullChecks": false,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true,
-    "esModuleInterop": true,
-    "lib": ["DOM", "ESNext", "WebWorker"],
-    "outDir": "dist",
+    "baseUrl": "./",
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@testing-library",
+      "src/types",
+      "types"
+    ],
+    "types": ["node", "jest", "react", "react-dom", "vite/client"],
+    "resolveJsonModule": true,
+    "plugins": [
+      {
+        "transform": "typescript-plugin-styled-components",
+        "type": "config",
+        "minify": true
+      }
+    ],
     "paths": {
-      "error-boundaries": ["./component/common/ErrorBoundaries.tsx"],
-      "test-utils": ["test-utils"],
-      "@temposoftware/tempo-i18n": ["./translate.ts"]
-    }
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+      "@api/*": ["src/api/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@configs/*": ["src/configs/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@features/*": ["src/features/*"],
+      "@models/*": ["src/models/*"],
+      "@pages/*": ["src/pages/*"],
+      "@routes/*": ["src/routes/*"],
+      "@services/*": ["src/services/*"],
+      "@theme/*": ["src/theme/*"],
+      "@utils/*": ["src/utils/*"]
+    },
+
+    "allowJs": true,
+
+    "sourceMap": true,
+    "outDir": "./build",
+    "removeComments": true,
+    "noEmit": true,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "inlineSources": true,
+    "newLine": "lf",
+    "noEmitHelpers": true,
+    "noEmitOnError": true,
+
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    "skipLibCheck": true
+  }
 }

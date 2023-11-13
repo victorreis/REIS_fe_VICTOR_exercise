@@ -1,30 +1,27 @@
-import * as React from 'react';
-import {useNavigate} from 'react-router-dom';
-import {HeaderContainer, NavigationHeader, BackButton, Title} from './styles';
+import { useNavigate } from 'react-router-dom';
 
-interface Props {
-    title: string;
-    showBackButton?: boolean;
-}
+import { HeaderContainer, BackButton, Title } from '@components/Header/styles';
 
-const Header = ({title, showBackButton = true}: Props) => {
-    const navigate = useNavigate();
-    return (
-        <HeaderContainer>
-            <NavigationHeader>
-                {showBackButton && (
-                    <BackButton
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                    >
-                        🔙
-                    </BackButton>
-                )}
-                <Title>{title}</Title>
-            </NavigationHeader>
-        </HeaderContainer>
-    );
+export type HeaderProps = {
+  title: string;
+  showBackButton?: boolean;
+};
+
+const Header = ({ title, showBackButton = true }: HeaderProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(-1);
+  };
+
+  return (
+    <HeaderContainer>
+      <Title>{title}</Title>
+      {showBackButton ? (
+        <BackButton onClick={handleClick}>🔙</BackButton>
+      ) : null}
+    </HeaderContainer>
+  );
 };
 
 export default Header;

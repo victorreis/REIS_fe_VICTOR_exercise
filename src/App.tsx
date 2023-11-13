@@ -1,25 +1,15 @@
-import * as React from 'react';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import TeamOverview from './pages/TeamOverview';
-import Teams from './pages/Teams';
-import UserOverview from './pages/UserOverview';
+import { RouterProvider } from 'react-router-dom';
 
-const App = () => {
-    var router = createBrowserRouter([
-        {
-            path: '/',
-            element: <Teams />,
-        },
-        {
-            path: '/team/:teamId',
-            element: <TeamOverview />,
-        },
-        {
-            path: '/user/:useId',
-            element: <UserOverview />,
-        },
-    ]);
-    return <RouterProvider router={router} />;
+import { GlobalStyle, PageContainer } from 'src/App.styles';
+import { routes } from 'src/router/routes';
+
+export const App = () => {
+  return (
+    <>
+      <GlobalStyle />
+      <PageContainer>
+        <RouterProvider router={routes} />
+      </PageContainer>
+    </>
+  );
 };
-
-export default App;

@@ -1,50 +1,55 @@
-import React from 'react';
-import {fireEvent, render, screen} from '@testing-library/react';
-import Header from '..';
+import Header from '@components/Header';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 const mockUseNavigate = jest.fn();
 
-jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'),
-    useNavigate: () => mockUseNavigate,
+jest.mock<typeof import('react-router-dom')>('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockUseNavigate,
 }));
 
-describe('Header', () => {
-    beforeAll(() => {
-        jest.useFakeTimers();
-    });
+describe('header', () => {
+  const header = 'Header';
 
-    afterEach(() => {
-        jest.clearAllTimers();
-    });
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
 
-    afterAll(() => {
-        jest.useRealTimers();
-    });
+  afterEach(() => {
+    jest.clearAllTimers();
+  });
 
-    it('should render header', () => {
-        render(<Header title="Header" />);
+  afterAll(() => {
+    jest.useRealTimers();
+  });
 
-        expect(screen.getByText('Header')).toBeInTheDocument();
-    });
+  it('should render header', () => {
+    expect.assertions(1);
+    render(<Header title={header} />);
 
-    it('should render back button in header', () => {
-        render(<Header title="Header" showBackButton />);
+    expect(screen.getByText('Header')).toBeInTheDocument();
+  });
 
-        expect(screen.getByRole('button')).toBeInTheDocument();
-    });
+  it('should render back button in header', () => {
+    expect.assertions(1);
+    render(<Header showBackButton title={header} />);
 
-    it('should not render back button in header', () => {
-        render(<Header title="Header" showBackButton={false} />);
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
 
-        expect(screen.queryByRole('button')).not.toBeInTheDocument();
-    });
+  it('should not render back button in header', () => {
+    expect.assertions(1);
+    render(<Header showBackButton={false} title={header} />);
 
-    it('should navigate back when back button is clicked', () => {
-        render(<Header title="Header" showBackButton />);
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  });
 
-        fireEvent.click(screen.getByRole('button'));
+  it('should navigate back when back button is clicked', () => {
+    expect.assertions(1);
+    render(<Header showBackButton title={header} />);
 
-        expect(mockUseNavigate).toHaveBeenCalled();
-    });
+    fireEvent.click(screen.getByRole('button'));
+
+    expect(mockUseNavigate).toHaveBeenCalledTimes(1);
+  });
 });

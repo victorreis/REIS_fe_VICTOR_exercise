@@ -1,11 +1,11 @@
-import React from 'react';
-import {render, screen} from '@testing-library/react';
-import {Spinner} from '..';
+import { Spinner } from '@components/Spinner';
+import { render, screen } from '@testing-library/react';
 
-describe('Spinner', () => {
-    it('should render spinner', () => {
-        render(<Spinner />);
+describe('spinner', () => {
+  it('should render spinner', () => {
+    expect.assertions(1);
+    render(<Spinner />);
 
-        expect(screen.getByTestId('spinner')).toBeInTheDocument();
-    });
+    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+  });
 });

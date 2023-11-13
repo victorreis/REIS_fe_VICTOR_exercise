@@ -1,48 +1,34 @@
-import * as React from 'react';
-import {useNavigate} from 'react-router-dom';
-import {Teams, UserData} from 'types';
-import {Container} from './styles';
+import { CardContainer, CardItem } from '@components/Card/styles';
+import { Column } from '@models/Column';
 
-interface Props {
-    id?: string;
-    url?: string;
-    columns: Array<{
-        key: string;
-        value: string;
-    }>;
-    hasNavigation?: boolean;
-    navigationProps?: UserData | Teams;
-}
+export type CardProps = {
+  id?: string;
+  columns: Column[];
+  onClick?: () => void;
+};
 
-const Card = ({
-    id,
-    columns,
-    url,
-    hasNavigation = true,
-    navigationProps = null,
-}: Props): JSX.Element => {
-    const navigate = useNavigate();
+const Card = ({ id, columns, onClick }: CardProps): JSX.Element | null => {
+  if (!columns || columns.length === 0) return null;
 
-    return (
-        <Container
-            data-testid={`cardContainer-${id}`}
-            hasNavigation={hasNavigation}
-            onClick={(e: Event) => {
-                if (hasNavigation) {
-                    navigate(url, {
-                        state: navigationProps,
-                    });
-                }
-                e.preventDefault();
-            }}
-        >
-            {columns.map(({key: columnKey, value}) => (
-                <p key={columnKey}>
-                    <strong>{columnKey}</strong>&nbsp;{value}
-                </p>
-            ))}
-        </Container>
-    );
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault();
+    if (onClick) onClick();
+  };
+
+  return (
+    <CardContainer
+      $clickable={Boolean(onClick)}
+      data-testid={`cardContainer-${id}`}
+      onClick={handleClick}
+    >
+      {columns.map(({ key, value }) => (
+        <CardItem key={key}>
+          <strong>{key}</strong>
+          {value}
+        </CardItem>
+      ))}
+    </CardContainer>
+  );
 };
 
 export default Card;

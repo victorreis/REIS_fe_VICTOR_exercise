@@ -1,15 +1,26 @@
 import styled from 'styled-components';
 
-export const Container = styled.div<{hasNavigation: boolean}>`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    background: #ddd;
-    padding: 20px;
-    width: 250px;
-    max-height: 200px;
-    cursor: ${props => (props.hasNavigation ? 'pointer' : 'default')};
-    margin: 5px;
+export const CardContainer = styled.div<{ $clickable: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 5rem;
+
+  width: 15rem;
+  padding: 1rem;
+  margin: 0.25rem;
+
+  background-color: #dddddd;
+  border: 1px solid #777777;
+  border-radius: 1rem;
+  cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
+
+  &:hover {
+    ${({ $clickable }) => ($clickable ? 'background-color: #cccccc' : '')}
+  }
+`;
+
+export const CardItem = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

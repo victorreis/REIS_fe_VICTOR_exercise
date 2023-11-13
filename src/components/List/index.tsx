@@ -1,34 +1,35 @@
-import * as React from 'react';
-import {ListItem} from 'types';
-import Card from '../Card';
-import {Spinner} from '../Spinner';
-import {Container} from './styles';
+import Card from '@components/Card';
+import { ListContainer } from '@components/List/styles';
+import { Spinner } from '@components/Spinner';
+import { Item } from '@models/Item';
 
-interface Props {
-    items?: ListItem[];
-    hasNavigation?: boolean;
-    isLoading: string;
-}
+export type ListProps = {
+  items?: Item[];
+  isLoading: boolean;
+  onClick?: (item: Item) => void;
+};
 
-const List = ({items, hasNavigation = true, isLoading}: Props) => {
-    return (
-        <Container>
-            {isLoading && <Spinner />}
-            {!isLoading &&
-                items.map(({url, id, columns, navigationProps}, index) => {
-                    return (
-                        <Card
-                            key={`${id}-${index}`}
-                            id={id}
-                            columns={columns}
-                            navigationProps={navigationProps}
-                            hasNavigation={hasNavigation}
-                            url={url}
-                        />
-                    );
-                })}
-        </Container>
-    );
+const List = ({ items, isLoading, onClick }: ListProps) => {
+  const hasItems = items && items.length > 0;
+  const showItems = !isLoading && hasItems;
+  const showEmptyListMessage = !isLoading && !hasItems;
+
+  const handleClick = (item: Item) => () => {
+    if (onClick) onClick(item);
+  };
+
+  if (isLoading) return <Spinner />;
+
+  return (
+    <ListContainer>
+      {showItems
+        ? items.map((item) => (
+            <Card key={item.id} onClick={handleClick(item)} {...item} />
+          ))
+        : null}
+      {showEmptyListMessage ? <>No items to show.</> : null}
+    </ListContainer>
+  );
 };
 
 export default List;
