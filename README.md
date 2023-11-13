@@ -82,7 +82,7 @@ Check the [CHANGES](./CHANGES.md).
 - Linting code: `yarn lint`
 - Build: `yarn build`
 - Tests: `yarn test`
-~~- Scaffolding: `yarn g`~~
+  ~~- Scaffolding: `yarn g`~~
 
 ## Critique
 
